@@ -27,3 +27,12 @@ jobs:
     - name: Execute binary
       run: ./hello_world
       working-directory: ./src
+
+    - name: Echo 
+      id: echo 
+      run: echo "Hello, world!" 
+      outputs: 　
+        my_output: ${ steps.echo.outputs.stdout }
+
+    - name: Print Output 
+      run: echo "Output: ${ steps.echo.outputs.my_output }"
