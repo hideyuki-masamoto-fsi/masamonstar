@@ -12,10 +12,9 @@ jobs:
     - name: Create new Branch
       env: 
         BRANCH_NAME: "test"
-      run: | 
-        git branch $BRANCH_NAME 
-        git checkout $BRANCH_NAME 
-        git push --set-upstream origin $BRANCH_NAME
+      run: git branch $BRANCH_NAME
+    - name: checkout new Branch
+      run: git checkout $BRANCH_NAME 
     - name: Install build tools
       run: sudo apt-get update && sudo apt-get install -y build-essential
     - name: Build C code
