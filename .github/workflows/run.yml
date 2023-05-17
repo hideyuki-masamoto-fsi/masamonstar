@@ -1,6 +1,11 @@
 name: C Build and Test
 
-on: [push, pull_request]
+on:
+  workflow_dispatch:
+    inputs:
+      input_sha1:
+        description: 'Please enter the SHA1 to build.'
+        required: true
 
 jobs:
   build:
