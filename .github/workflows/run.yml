@@ -1,34 +1,17 @@
-name: C Build and Test
+name: form-example
 
 on:
-  workflow_dispatch:
-    inputs:
-      input_sha1:
-        description: 'Please enter the SHA1 to build.'
-        required: false
-
+ workflow_dispatch:
+  inputs:
+   input_node:
+    description: 'Input Node Name.'
+    required: true
+    default: 'node A'
+    options: ${ fromJson( toString( fromFile('choices.json') ) ).options }
+    
 jobs:
-  build:
-    runs-on: ubuntu-20.04
-
-    steps:
-    - name: checkout repo
-      uses: actions/checkout@v2
-    - name: Create new Branch
-      env: 
-        BRANCH_NAME: "test"
-      run: git branch $BRANCH_NAME
-    - name: checkout new Branch
-      run: git checkout $BRANCH_NAME 
-    - name: Install build tools
-      run: sudo apt-get update && sudo apt-get install -y build-essential
-    - name: Build C code
-      run: sh build.sh
-      working-directory: ./src
-    - name: Print current directory and branch name 
-      run: | 
-        echo pwd 
-        git rev-parse --abbrev-ref HEAD
-    - name: Execute binary
-      run: ./hello_world
-      working-directory: ./src
+    check-bats-version:
+      runs-on: ubuntu-20.04
+      
+      steps:
+        - run: echo "Hello world"
