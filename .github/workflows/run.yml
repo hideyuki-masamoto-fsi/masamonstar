@@ -6,17 +6,15 @@ on:
    input_node:
     description: 'Input Node Name.'
     required: true
-    options: ${ steps.read_options.outputs.options }
+    options: ${ fromJson((steps.read_options.outputs.options) }
     
 jobs:
-    check-bats-version:
-      runs-on: ubuntu-20.04
-      steps:
-        - name: Read options from JSON file
-          id: read_options
-          run: |
-            option1=$(jq -r '.options[0]' choices.json)
-            option2=$(jq -r '.options[1]' choices.json)
-            option3=$(jq -r '.options[2]' choices.json)
-            options=$(echo $option1,$option2,$option3)
-            echo "::set-output name=options::$options"
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Read options from JSON file
+        id: read_options
+        run: |
+          options=$(jq -r '.options' options.json)
+          echo "::set-output name=options::$options"
