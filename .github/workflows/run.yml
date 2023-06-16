@@ -16,5 +16,5 @@ jobs:
       - name: Read options from JSON file
         id: read_options
         run: |
-          options=$(jq -r '.options' options.json)
+          options=$(jq -r '.options' choices.json)
           echo "::set-output name=options::$options"
