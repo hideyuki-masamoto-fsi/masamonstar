@@ -6,13 +6,14 @@ on:
    input_node:
     description: 'Input Node Name.'
     required: true
-    options: ${ fromJson((steps.read_options.outputs.options) }
     
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Read options from JSON file
+        uses: actions/checkout@v3
       - name: Read options from JSON file
         id: read_options
         run: |
