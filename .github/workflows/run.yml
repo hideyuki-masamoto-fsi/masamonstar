@@ -8,16 +8,23 @@ on:
     required: true
     
 jobs:
-  build:
+  excel-graph:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Read options from JSON file
-        uses: actions/checkout@v3
-      - name: Read options from JSON file
-        id: read_options
-        run: |
-          filename="test.txt"
-          result=$(cat "$filename")
-          echo "$result"
-          echo "::set-output name=options::$result"
+    - uses: actions/checkout@v3
+    - name: Set up Python environment
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      run: |
+        pip install xlrd xlwt openpyxl
+    - name: Generate Excel file and graph
+      run: |
+        cd ./src
+        python generate_excel.py
+    - name: Upload Excel file
+      uses: actions/upload-artifact@v3
+      with:
+        name: excel-graph
+        path: example.xls
