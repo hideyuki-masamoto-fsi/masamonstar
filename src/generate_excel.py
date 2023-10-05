@@ -22,10 +22,10 @@ worksheet.write(3, 0, '1/3/2021')
 worksheet.write(3, 1, 300)
 
 # Save the workbook to disk
-workbook.save('example.xls')
+workbook.save('example.xlsx')
 
 # Open the workbook with openpyxl
-book = load_workbook('example.xls')
+book = load_workbook('example.xlsx')
 sheet = book.active
 
 # Create a new chart and add data
