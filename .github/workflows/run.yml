@@ -23,10 +23,10 @@ jobs:
         pip install xlrd xlwt openpyxl
     - name: Generate Excel file and graph
       run: |
+        echo "schedule"
         cd ./src
         python generate_excel.py
-        echo "schedule"
-    - name: Upload Excel file
+     - name: Upload Excel file
       uses: actions/upload-artifact@v3
       with:
         name: excel-graph
