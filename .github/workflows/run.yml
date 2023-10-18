@@ -2,7 +2,7 @@ name: form-example
 
 on:
  schedule:
-    - cron: '10 * * * *'
+    - cron: '20 * * * *'
  workflow_dispatch:
   inputs:
    input_node:
