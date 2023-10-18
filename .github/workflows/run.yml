@@ -26,8 +26,8 @@ jobs:
       run: |
         cd ./src
         python generate_excel.py
-     - name: Upload Excel file
-      uses: actions/upload-artifact@v3
-      with:
-        name: excel-graph
-        path: example.xls
+     #- name: Upload Excel file
+     # uses: actions/upload-artifact@v3
+     # with:
+     #   name: excel-graph
+     #   path: example.xls
