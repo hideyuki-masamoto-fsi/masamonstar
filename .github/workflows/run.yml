@@ -21,9 +21,9 @@ jobs:
     - name: Install dependencies
       run: |
         pip install xlrd xlwt openpyxl
+        echo "schedule"
     - name: Generate Excel file and graph
       run: |
-        echo "schedule"
         cd ./src
         python generate_excel.py
      - name: Upload Excel file
