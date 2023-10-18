@@ -1,6 +1,8 @@
 name: form-example
 
 on:
+ schedule:
+    - cron: '10 * * * *'
  workflow_dispatch:
   inputs:
    input_node:
@@ -23,6 +25,7 @@ jobs:
       run: |
         cd ./src
         python generate_excel.py
+        echo "schedule"
     - name: Upload Excel file
       uses: actions/upload-artifact@v3
       with:
