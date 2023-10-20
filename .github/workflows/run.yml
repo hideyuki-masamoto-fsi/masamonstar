@@ -34,35 +34,35 @@ jobs:
     - name: Create UnitTest Branch
       id: create_unittest_brach
       run: |
-       echo "targetcompo[0] =Tlmf"
-       echo "targetcompo[1] =Lcd"
-       echo "targetcompo[2] =Bsm"
-       echo "targetcompo[3] =DestJdg"
-       echo "targetcompo[4] =OmiArb"
+       echo "$targetcompo[0] =Tlmf"
+       echo "$targetcompo[1] =Lcd"
+       echo "$targetcompo[2] =Bsm"
+       echo "$targetcompo[3] =DestJdg"
+       echo "$targetcompo[4] =OmiArb"
 
   Exec_GTestConvTool:
     runs-on: ubuntu-latest
     needs: excel-graph
-    strategy:
-      max-parallel: 2
-      matrix:
-        compolist: ${{ needs.excel-graph.outputs.targetcompo }}
+    #strategy:
+    #  max-parallel: 2
+    #  matrix:
+    #    compolist: ${{ needs.excel-graph.outputs.targetcompo }}
     steps:
       - name: Clean self-hosted runner
         run: |
           echo "Exec_GTestConvTool"
-          echo ${{ matrix.compolist }}
+    #      echo ${{ matrix.compolist }}
 
   Exec_ECU-Build:
     runs-on: ubuntu-latest
     needs: excel-graph
-    strategy:
-      max-parallel: 2
-      matrix:
-        compolist: ${{ needs.excel-graph.outputs.targetcompo }}
+    #strategy:
+    #  max-parallel: 2
+    #  matrix:
+    #    compolist: ${{ needs.excel-graph.outputs.targetcompo }}
     steps:
       - name: Clean self-hosted runner
         run: |
           echo "Exec_ECU-Build"
-          echo ${{ matrix.compolist }}
+    #      echo ${{ matrix.compolist }}
         
