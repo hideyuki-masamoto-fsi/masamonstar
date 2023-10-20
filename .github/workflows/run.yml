@@ -34,12 +34,14 @@ jobs:
     - name: Create UnitTest Branch
       id: create_unittest_brach
       run: |
-       $targetcompo ="Tlmf"
+       TEST=あいうえお
+       echo $TEST
+       #$targetcompo ="Tlmf"
        #echo "targetcompo[1] =Lcd"
        #echo "targetcompo[2] =Bsm"
        #echo "targetcompo[3] =DestJdg"
        #echo "targetcompo[4] =OmiArb"
-       echo "$targetcompo"
+       #echo "$targetcompo"
        #echo "$targetcompo[1]"
        #echo "$targetcompo[2]"
        #echo "$targetcompo[3]"
