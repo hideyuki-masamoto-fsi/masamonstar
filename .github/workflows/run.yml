@@ -34,7 +34,7 @@ jobs:
     - name: Create UnitTest Branch
       id: create_unittest_brach
       run: |
-         $targetcompo = @("Tlmf","Lcd","Bsm","DestJdg","OmiArb")
+         $targetcompo = @('Tlmf','Lcd','Bsm','DestJdg','OmiArb')
 
   Exec_GTestConvTool:
     runs-on: ubuntu-latest
