@@ -35,7 +35,7 @@ jobs:
       id: create_unittest_brach
       run: |
        echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c
-       list=$(echo ["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c)
+       list=$(echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c)
        echo "targetcompo=${list}" >> $GITHUB_OUTPUT
        
        #targetcompo[0]=Tlmf
