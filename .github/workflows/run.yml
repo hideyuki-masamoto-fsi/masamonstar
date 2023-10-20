@@ -34,11 +34,11 @@ jobs:
     - name: Create UnitTest Branch
       id: create_unittest_brach
       run: |
-       targetcompo[0] ="Tlmf"
-       targetcompo[1] ="Lcd"
-       targetcompo[2] ="Bsm"
-       targetcompo[3] ="DestJdg"
-       targetcompo[4] ="OmiArb"
+       echo "targetcompo[0] =Tlmf"
+       echo "targetcompo[1] =Lcd"
+       echo "targetcompo[2] =Bsm"
+       echo "targetcompo[3] =DestJdg"
+       echo "targetcompo[4] =OmiArb"
 
   Exec_GTestConvTool:
     runs-on: ubuntu-latest
