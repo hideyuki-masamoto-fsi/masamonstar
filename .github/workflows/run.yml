@@ -55,26 +55,23 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        #compolist: ${{ needs.excel-graph.outputs.targetcompo }}
         compolist: ${{fromJson( needs.excel-graph.outputs.targetcompo )}}
     steps:
       - name: Clean self-hosted runner
         run: |
           echo "Exec_GTestConvTool"
           echo ${{ matrix.compolist }}
-    #      echo ${{ excel-graph.outputs.targetcompo }}
-
 
   Exec_ECU-Build:
     runs-on: ubuntu-latest
     needs: excel-graph
-    #strategy:
-    #  max-parallel: 2
-    #  matrix:
-    #    compolist: ${{ needs.excel-graph.outputs.targetcompo }}
+    strategy:
+      max-parallel: 2
+      matrix:
+        compolist: ${{fromJson( needs.excel-graph.outputs.targetcompo )}}
     steps:
       - name: Clean self-hosted runner
         run: |
           echo "Exec_ECU-Build"
-    #      echo ${{ matrix.compolist }}
+          echo ${{ matrix.compolist }}
         
