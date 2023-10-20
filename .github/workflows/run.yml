@@ -34,7 +34,7 @@ jobs:
     - name: Create UnitTest Branch
       id: create_unittest_brach
       run: |
-       echo "targetcompo =Tlmf"
+       targetcompo ="Tlmf"
        #echo "targetcompo[1] =Lcd"
        #echo "targetcompo[2] =Bsm"
        #echo "targetcompo[3] =DestJdg"
