@@ -44,7 +44,7 @@ jobs:
        #echo "targetcompo=${env:input_compo}" >> $GITHUB_OUTPUT
        #targetcompo=$(echo 'env:input_compo' | jq -c)
        #targetcompo=$(echo '["Tlmf"]' | jq -c)
-       targetcompo=$(echo "${env:input_compo}" | jq -c)
+       targetcompo=$(echo "${{env:input_compo}}" | jq -c)
        echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
        echo "${{env.input_compo}}"
        echo "${targetcompo}"
