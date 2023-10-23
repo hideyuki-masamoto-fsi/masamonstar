@@ -34,20 +34,10 @@ jobs:
     - name: Create UnitTest Branch
       id: create_unittest_brach
       run: |
-       echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c
+       #echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c
+       #list=$(echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c)
        list=$(echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c)
        echo "targetcompo=${list}" >> $GITHUB_OUTPUT
-       
-       #targetcompo[0]=Tlmf
-       #targetcompo[1]=Lcd
-       #targetcompo[2]=Bsm
-       #targetcompo[3]=DestJdg
-       #targetcompo[4]=OmiArb
-       #echo ${targetcompo[0]}
-       #echo ${targetcompo[1]}
-       #echo ${targetcompo[2]}
-       #echo ${targetcompo[3]}
-       #echo ${targetcompo[4]}
    
   Exec_GTestConvTool:
     runs-on: ubuntu-latest
