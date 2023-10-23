@@ -37,17 +37,13 @@ jobs:
     - name: Create UnitTest Branch
       id: create_unittest_brach
       run: |
+       #サンプル１
        #echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c
        #list=$(echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c)
        #echo "targetcompo=${list}" >> $GITHUB_OUTPUT
-       #targetcompo="${env:input_compo}"
-       #echo "targetcompo=${env:input_compo}" >> $GITHUB_OUTPUT
-       #targetcompo=$(echo 'env:input_compo' | jq -c)
-       #targetcompo=$(echo '["Tlmf"]' | jq -c)
+       #サンプル２
        targetcompo=$(echo '["${{env.input_compo}}"]' | jq -c)
        echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
-       echo "${{env.input_compo}}"
-       echo "${targetcompo}"
    
   Exec_GTestConvTool:
     runs-on: ubuntu-latest
