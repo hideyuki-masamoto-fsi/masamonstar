@@ -43,7 +43,7 @@ jobs:
        #targetcompo="${env:input_compo}"
        #echo "targetcompo=${env:input_compo}" >> $GITHUB_OUTPUT
        #targetcompo=$(echo 'env:input_compo' | jq -c)
-       targetcompo="Tlmf"
+       targetcompo=$(echo '["Tlmf"]' | jq -c)
        echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
    
   Exec_GTestConvTool:
