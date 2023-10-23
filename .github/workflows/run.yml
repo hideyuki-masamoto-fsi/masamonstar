@@ -39,7 +39,7 @@ jobs:
       run: |
        #echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c
        #list=$(echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c)
-       list = $(echo '["${env:input_compo}"' | jq -c)
+       list=$(echo '["${env:input_compo}"' | jq -c)
        echo "targetcompo=${list}" >> $GITHUB_OUTPUT
    
   Exec_GTestConvTool:
