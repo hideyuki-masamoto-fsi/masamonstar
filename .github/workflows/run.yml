@@ -48,7 +48,7 @@ jobs:
        echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
        echo ${ env:input_compo }
        echo ${ targetcompo }
-       echo ${{fromJson( targetcompo )}}
+       echo ${{fromJson( $targetcompo )}}
    
   Exec_GTestConvTool:
     runs-on: ubuntu-latest
