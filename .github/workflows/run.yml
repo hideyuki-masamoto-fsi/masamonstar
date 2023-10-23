@@ -11,7 +11,8 @@ on:
 jobs:
   excel-graph:
     env:
-      input_compo: "Tlmf"
+      #input_compo: "Tlmf"
+      input_compo: '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
     runs-on: ubuntu-latest
     outputs:
       targetcompo:  ${{ steps.create_unittest_brach.outputs.targetcompo }}
@@ -41,7 +42,10 @@ jobs:
        #echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c
        #list=$(echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c)
        #echo "targetcompo=${list}" >> $GITHUB_OUTPUT
-       #サンプル２
+       #サンプル２(単体コンポ)
+       #targetcompo=$(echo '["${{env.input_compo}}"]' | jq -c)
+       #echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
+       #サンプル３(全コンポ)
        targetcompo=$(echo '["${{env.input_compo}}"]' | jq -c)
        echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
    
