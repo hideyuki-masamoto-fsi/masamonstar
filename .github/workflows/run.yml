@@ -6,9 +6,12 @@ on:
    input_node:
     description: 'Input Node Name.'
     required: true
+ 
     
 jobs:
   excel-graph:
+    env:
+      input_compo: "Tlmf"
     runs-on: ubuntu-latest
     outputs:
       targetcompo:  ${{ steps.create_unittest_brach.outputs.targetcompo }}
@@ -36,7 +39,7 @@ jobs:
       run: |
        #echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c
        #list=$(echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c)
-       list=$(echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c)
+       list = $(echo '["${env:input_compo}"' | jq -c)
        echo "targetcompo=${list}" >> $GITHUB_OUTPUT
    
   Exec_GTestConvTool:
