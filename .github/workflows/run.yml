@@ -46,7 +46,7 @@ jobs:
        #targetcompo=$(echo '["Tlmf"]' | jq -c)
        targetcompo=$(echo "${env:input_compo}" | jq -c)
        echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
-       echo ${{ env:input_compo }}
+       echo ${ env:input_compo }
        echo ${{ targetcompo }}
        echo ${{fromJson( targetcompo )}}
    
