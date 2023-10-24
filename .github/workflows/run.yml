@@ -11,8 +11,8 @@ on:
 jobs:
   excel-graph:
     env:
-      #input_compo: "Tlmf"
-      input_compo: '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
+      input_compo: "Tlmf"
+      #input_compo: '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
     runs-on: ubuntu-latest
     outputs:
       targetcompo:  ${{ steps.create_unittest_brach.outputs.targetcompo }}
