@@ -30,6 +30,16 @@ jobs:
       run: |
         #cd ./src
         #python generate_excel.py
+    - name: Install jq
+      id: install_jq
+      run: |
+        if ( [ ! -f $HOME/bin/jq ] ); then
+          mkdir -p ~/bin
+          wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -O ~/bin/jq
+          chmod +x ~/bin/jq
+        else
+          echo "jq is already installed."
+        fi
      #- name: Upload Excel file
      # uses: actions/upload-artifact@v3
      # with:
