@@ -66,14 +66,6 @@ jobs:
     - name: Create UnitTest Branch
       id: create_unittest_brach
       run: |
-       #サンプル１
-       #echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c
-       #list=$(echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c)
-       #echo "targetcompo=${list}" >> $GITHUB_OUTPUT
-       #サンプル２(単体コンポ)
-       #targetcompo=$(echo '["${{input.input_compo}}"]' | jq -c)
-       #echo "${targetcompo}"
-       #echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
        #サンプル３(全コンポ)
        targetcompo=${{inputs.input_node}}
        echo "${targetcompo}"
