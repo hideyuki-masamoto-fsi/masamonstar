@@ -79,7 +79,7 @@ jobs:
       - name: Clean self-hosted runner
         run: |
           echo "Exec_GTestConvTool"
-          echo "${{ needs.excel-graph.outputs.testtype }}"
+          echo "test_type = ${{ needs.excel-graph.outputs.testtype }}"
 
   Exec_ECU-Build:
     runs-on: ubuntu-latest
@@ -89,5 +89,5 @@ jobs:
       - name: Clean self-hosted runner
         run: |
           echo "Exec_ECU-Build"
-          echo "${{ needs.excel-graph.outputs.testtype }}"
+          echo "test_type = ${{ needs.excel-graph.outputs.testtype }}"
         
