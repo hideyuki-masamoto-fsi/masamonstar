@@ -39,6 +39,7 @@ jobs:
         cd ./.github/workflows
         
         $check_flg = $false
+        echo "input = ${{inputs.input_compo}}"
         pwd
         foreach ($content in Get-Content ./choices.json) {
          echo "loop"
