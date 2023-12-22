@@ -16,7 +16,7 @@ jobs:
     runs-on: windows-latest
     outputs:
       targetcompo:  ${{ steps.create_unittest_brach.outputs.targetcompo }}
-      testtype:  ${{ steps.create_unittest_brach.outputs.testtype }}
+      testtype:  ${{ steps.get_comp_test_type.outputs.testtype }}
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python environment
