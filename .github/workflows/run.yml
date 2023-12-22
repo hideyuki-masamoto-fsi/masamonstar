@@ -53,7 +53,7 @@ jobs:
           } elseif ($check_flg -eq $true -and $content -like "*test_type*") {
             $testtype = $content.Substring(22, ($content.Length-24))
             echo "content = $content"
-            braek
+            break
           }
         }
         echo "testtype=$testtype" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
