@@ -74,7 +74,7 @@ jobs:
   Exec_GTestConvTool:
     runs-on: ubuntu-latest
     needs: excel-graph
-    if: ${{ needs.excel-graph.outputs.testtype }} != 'csv'
+    if: needs.excel-graph.outputs.testtype ne 'csv'
     steps:
       - name: Clean self-hosted runner
         run: |
@@ -84,7 +84,7 @@ jobs:
   Exec_ECU-Build:
     runs-on: ubuntu-latest
     needs: excel-graph
-    if: ${{ needs.excel-graph.outputs.testtype }} == 'csv'
+    if: needs.excel-graph.outputs.testtype eq 'csv'
     steps:
       - name: Clean self-hosted runner
         run: |
