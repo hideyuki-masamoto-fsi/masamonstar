@@ -47,6 +47,7 @@ jobs:
         pwd
         cd ./.github/workflows
         json=`jq '.[] | select(.node_name == "${{ inputs.input_comp }}")' ./choices.json`
+        echo "$json"
         testtype=`echo $json | jq .test_type`
         echo "testtype=$testtype"
      #- name: Upload Excel file
