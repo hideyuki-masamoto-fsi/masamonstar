@@ -51,7 +51,7 @@ jobs:
               echo "check_flg = $check_flg"
             }
           } elseif ($check_flg -eq $true -and $content -like "*test_type*") {
-            $testtype = $content.Substring(22, ($content.Length))
+            $testtype = $content.Substring(22, ($content.Length-23))
             echo "content = $content"
             break
           }
