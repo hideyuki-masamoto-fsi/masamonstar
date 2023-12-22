@@ -35,10 +35,11 @@ jobs:
       id: get_comp_test_type
       run: |
         # 実行するコンポのテスト種別を取得する
+        pwd
         cd ./.github/workflows
         
         $check_flg = $false
-
+        pwd
         foreach ($content in Get-Content ./choices.json) {
           if ($content -like "*node_name*") {
             $node_name = $content.Substring(22, ($content.Length-24))
