@@ -13,9 +13,10 @@ jobs:
     env:
       #input_compo: "Tlmf"
       input_compo: '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     outputs:
       targetcompo:  ${{ steps.create_unittest_brach.outputs.targetcompo }}
+      testtype:  ${{ steps.create_unittest_brach.outputs.testtype }}
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python environment
@@ -30,28 +31,26 @@ jobs:
       run: |
         #cd ./src
         #python generate_excel.py
-    - name: Install jq
-      id: install_jq
-      run: |
-        if ( [ ! -f $HOME/bin/jq ] ); then
-          mkdir -p ~/bin
-          wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -O ~/bin/jq
-          chmod +x ~/bin/jq
-        else
-          echo "jq is already installed."
-        fi
     - name: Get Comp Test Type
       id: get_comp_test_type
       run: |
         # 実行するコンポのテスト種別を取得する
-        pwd
         cd ./.github/workflows
-        json=`jq '.[] | select(.node_name == "${{ inputs.input_comp }}")' ./choices.json`
-        echo "$json"
-        testtype=`echo $json | jq .test_type`
-        echo "testtype=$testtype"
-        test="テストします"
-        echo "test=$test"
+        
+        $check_flg = $false
+
+        foreach ($content in Get-Content ./choices.json) {
+          if ($content -like "*node_name*") {
+            $node_name = $content.Substring(22, ($content.Length-24))
+            if ($node_name -eq "${{inputs.input_compo}}"){
+              $check_flg = $true
+            }
+          } elseif ($check_flg -eq $true -and $content -like "*test_type*") {
+            $testtype = $content.Substring(22, ($content.Length-24))
+            braek
+          }
+        }
+        echo "testtype=$testtype" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
      #- name: Upload Excel file
      # uses: actions/upload-artifact@v3
      # with:
