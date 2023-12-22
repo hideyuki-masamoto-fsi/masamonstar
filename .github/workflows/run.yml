@@ -46,7 +46,7 @@ jobs:
           if ($content -like "*node_name*") {
             $node_name = $content.Substring(22, ($content.Length-24))
             echo "node_name = $node_name"
-            if ($node_name -eq "${{inputs.input_compo}}"){
+            if ($node_name -eq "${{inputs.input_node}}"){
               $check_flg = $true
               echo "check_flg = $check_flg"
             }
