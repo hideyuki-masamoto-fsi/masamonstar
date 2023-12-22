@@ -41,6 +41,7 @@ jobs:
         $check_flg = $false
         pwd
         foreach ($content in Get-Content ./choices.json) {
+         echo "loop"
           if ($content -like "*node_name*") {
             $node_name = $content.Substring(22, ($content.Length-24))
             if ($node_name -eq "${{inputs.input_compo}}"){
