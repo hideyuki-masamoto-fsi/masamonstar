@@ -45,6 +45,7 @@ jobs:
       run: |
         # 実行するコンポのテスト種別を取得する
         pwd
+        cd ./.github/workflows
         json=`jq '.[] | select(.node_name == "${{ inputs.input_comp }}")' ./choices.json`
         testtype=`echo $json | jq .test_type`
         echo "testtype=$testtype" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
