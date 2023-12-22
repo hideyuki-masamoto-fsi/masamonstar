@@ -75,7 +75,7 @@ jobs:
        #echo "${targetcompo}"
        #echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
        #サンプル３(全コンポ)
-       targetcompo=${{inputs.input_compo}}
+       targetcompo=${{inputs.input_node}}
        echo "${targetcompo}"
        echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
    
