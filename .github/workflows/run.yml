@@ -50,6 +50,8 @@ jobs:
         echo "$json"
         testtype=`echo $json | jq .test_type`
         echo "testtype=$testtype"
+        test="テストします"
+        echo "test=$test"
      #- name: Upload Excel file
      # uses: actions/upload-artifact@v3
      # with:
