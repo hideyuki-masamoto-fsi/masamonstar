@@ -44,9 +44,11 @@ jobs:
             $node_name = $content.Substring(22, ($content.Length-24))
             if ($node_name -eq "${{inputs.input_compo}}"){
               $check_flg = $true
+              echo "check_flg = $check_flg"
             }
           } elseif ($check_flg -eq $true -and $content -like "*test_type*") {
             $testtype = $content.Substring(22, ($content.Length-24))
+            echo "content = $content"
             braek
           }
         }
