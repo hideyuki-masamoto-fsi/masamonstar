@@ -1,7 +1,6 @@
 {
-  "options": [
-    "node A",
-    "node B",
-    "node C"
-  ]
+    "MRRRF": {
+        "node_name": "Mrf",
+        "test_type": "csv"
+    }
 }
