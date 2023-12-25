@@ -42,6 +42,7 @@ jobs:
         Write-Host $JsonFilePath
         $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
         Write-Host $JsonData
+        Write-Host $JsonData.${inputs.input_node}
         $testtype = $JsonData.${inputs.input_node}.test_type
         Write-Host $testType
         $testtype2 = $JsonData.Mrf.test_type
