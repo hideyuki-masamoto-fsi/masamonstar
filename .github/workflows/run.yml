@@ -48,7 +48,7 @@ jobs:
         $testtype2 = $JsonData.Mrf.test_type
         Write-Host $testtype2
 
-        foreach ($test in $data.PSObject.Properties.Value) {
+        foreach ($test in $JsonData.PSObject.Properties.Value) {
           if ($test.node_name -eq ${inputs.input_node}) {
             $test_type = $test.test_type
           }
