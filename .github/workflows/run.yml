@@ -53,16 +53,16 @@ jobs:
           Write-Host $test.node_name
           Write-Host ${inputs.input_node}
           if ($test.node_name -eq ${inputs.input_node}) {
-            $test_type = $test.test_type
+            $testtype = $test.test_type
             Write-Host "bingo1!!"
           }
           if ($test.node_name -eq "${{inputs.input_node}}") {
-            $test_type = $test.test_type
+            $testtype = $test.test_type
             Write-Host "bingo2!!"
           }
 
           if ($test.node_name -eq $inputs.input_node) {
-            $test_type = $test.test_type
+            $testtype = $test.test_type
             Write-Host "bingo3!!"
           }
         }
