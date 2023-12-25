@@ -40,7 +40,7 @@ jobs:
 
         $JsonFilePath = "choices.json"
         $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
-        $testtype = $JsonData.${{input.input_node}}.test_type
+        $testtype = $JsonData.${{inputs.input_node}}.test_type
         Write-Host $testType
         echo "testtype=$testtype" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
         echo "testtype=$testtype"
