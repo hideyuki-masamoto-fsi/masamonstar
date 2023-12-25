@@ -50,6 +50,8 @@ jobs:
 
         foreach ($test in $JsonData.PSObject.Properties.Value) {
           Write-Host $test
+          Write-Host $test.node_name
+          Write-Host ${inputs.input_node}
           if ($test.node_name -eq ${inputs.input_node}) {
             $test_type = $test.test_type
           }
