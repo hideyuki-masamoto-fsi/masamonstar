@@ -47,6 +47,6 @@ jobs:
       - name: value_confirm
         run: | 
           #出力確認
-          $build_info = ${{ needs.ECU-Build_Env_Setup.outputs.build_info }}
+          $build_info = ${{ needs.Exec_ECU-Build.outputs.build_info }}
           echo "build_info = $build_info"
     
