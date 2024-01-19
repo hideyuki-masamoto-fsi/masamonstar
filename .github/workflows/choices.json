@@ -4,20 +4,24 @@
         "node_name": "Mrf",
         "stub_path": "TBD",
         "test_type": "csv"
+        "core_partition": "base_cr",
     },
     "BlindSpotMonitorApplications": {
         "node_name": "Bsm",
         "stub_path": "TBD",
         "test_type": "TBD"
+        "core_partition": "base_cr",
     },
     "DestinationJudge": {
         "node_name": "DestJdg",
         "stub_path": "TBD",
         "test_type": "TBD"
+        "core_partition": "base_cr",
     },
     "VehiclePrediction": {
         "node_name": "VehPred",
         "stub_path": "TBD",
         "test_type": "TBD"
+        "core_partition": "base_cr",
     }
 }
