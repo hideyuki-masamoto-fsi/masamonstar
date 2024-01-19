@@ -9,96 +9,40 @@ on:
  
     
 jobs:
-  excel-graph:
+  Exec_ECU-Build:
     env:
       #input_compo: "Tlmf"
       input_compo: '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     outputs:
-      targetcompo:  ${{ steps.create_unittest_brach.outputs.targetcompo }}
-      testtype:  ${{ steps.get_comp_test_type.outputs.testtype }}
+      build_info: ${{ steps.get_build_switching_info.outputs.build_info}}
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python environment
-      uses: actions/setup-python@v3
-      with:
-        python-version: 3.9
-    - name: Install dependencies
-      run: |
-        pip install xlrd xlwt openpyxl
-        echo "schedule"
-    - name: Generate Excel file and graph
-      run: |
-        #cd ./src
-        #python generate_excel.py
-    - name: Get Comp Test Type
-      id: get_comp_test_type
-      run: |
-        # 実行するコンポのテスト種別を取得する
-        pwd
-        cd ./.github/workflows
-
-        $JsonFilePath = "choices.json"
-        Write-Host $JsonFilePath
-        $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
-        Write-Host $JsonData
-        Write-Host $JsonData.MultiRadarObjectFusion.node_name
-        $testtype = $JsonData.${inputs.input_node}.test_type
-        Write-Host $testType
-        $testtype2 = $JsonData.Mrf.test_type
-        Write-Host $testtype2
-
-        foreach ($test in $JsonData.PSObject.Properties.Value) {
-          Write-Host $test
-          Write-Host $test.node_name
-          Write-Host ${inputs.input_node}
-          if ($test.node_name -eq ${inputs.input_node}) {
-            $testtype = $test.test_type
-            Write-Host "bingo1!!"
-          }
-          if ($test.node_name -eq "${{inputs.input_node}}") {
-            $testtype = $test.test_type
-            Write-Host "bingo2!!"
-          }
-
-          if ($test.node_name -eq $inputs.input_node) {
-            $testtype = $test.test_type
-            Write-Host "bingo3!!"
-          }
-        }
-        
-        echo "testtype=$testtype" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
-        echo "testtype=$testtype"
-     #- name: Upload Excel file
-     # uses: actions/upload-artifact@v3
-     # with:
-     #   name: excel-graph
-     #   path: example.xls
-    - name: Create UnitTest Branch
-      id: create_unittest_brach
-      run: |
-       #サンプル３(全コンポ)
-       $targetcompo=@("Tlmf","Lcd","Bsm","DestJdg","OmiArb")
-       echo "${targetcompo}"
-       echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
-   
-  Exec_GTestConvTool:
-    runs-on: ubuntu-latest
-    needs: excel-graph
-    if: needs.excel-graph.outputs.testtype != 'csv'
-    steps:
-      - name: Clean self-hosted runner
+      #・ビルド時にCA/CR切り替える時に必要な情報をjsonファイルから取得
+      - name: Get Build Switching info
+        id: get_build_switching_info
         run: |
-          echo "Exec_GTestConvTool"
-          echo "test_type = ${{ needs.excel-graph.outputs.testtype }}"
+          #CA/CR情報を取得するためのjsonファイル
+          pwd
+          cd ./.github/workflows
 
-  Exec_ECU-Build:
+          $JsonFilePath = "choices.json"
+          $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
+
+          foreach ($cmp_info in $JsonData.PSObject.Properties.Value) {
+            if ($cmp_info.node_name -eq "${{ inputs.input_compo }}") {
+              $build_info = $cmp_info.core_partition
+              Write-Host "$build_info get information"
+            }
+          }
+
+  #値確認
+  VALUE-CONFIRM:
     runs-on: ubuntu-latest
-    needs: excel-graph
-    if: needs.excel-graph.outputs.testtype == 'csv'
+    needs: [Exec_ECU-Build]
+    name: VALUE-CONFIRM
     steps:
-      - name: Clean self-hosted runner
-        run: |
-          echo "Exec_ECU-Build"
-          echo "test_type = ${{ needs.excel-graph.outputs.testtype }}"
-        
+      - name: value_confirm
+        run: | 
+          #出力確認
+          Write-Host "build-info = ${{ needs.ECU-Build_Env_Setup.outputs.build_info }}"
+    
