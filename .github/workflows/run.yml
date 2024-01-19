@@ -46,7 +46,7 @@ jobs:
     steps:
       - name: value_confirm
         run: | 
-　　　　　pwd
+          pwd
 
           #出力確認
           $build_info=${{ needs.Exec_ECU-Build.outputs.build_info }}
