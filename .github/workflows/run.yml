@@ -11,8 +11,8 @@ on:
 jobs:
   Exec_ECU-Build:
     env:
-      #input_compo: "Tlmf"
-      input_compo: '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
+      #input_compo: "Mrf"
+      input_compo: '["Mrf","Bsm","DestJdg","VehPred"]'
     runs-on: ubuntu-latest
     outputs:
       build_info: ${{ steps.get_build_switching_info.outputs.build_info}}
