@@ -47,5 +47,5 @@ jobs:
       - name: value_confirm
         run: | 
           #出力確認
-          Write-Host "build-info = ${{ needs.ECU-Build_Env_Setup.outputs.build_info }}"
+          echo "build-info = ${{ needs.ECU-Build_Env_Setup.outputs.build_info }}"
     
