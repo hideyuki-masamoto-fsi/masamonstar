@@ -35,6 +35,8 @@ jobs:
             }
           }
 
+          echo "build_info=$build_info" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
+
   #値確認
   VALUE-CONFIRM:
     runs-on: ubuntu-latest
