@@ -17,6 +17,7 @@ jobs:
     outputs:
       build_info: ${{ steps.get_build_switching_info.outputs.build_info}}
     steps:
+      - uses: actions/checkout@v3
       #・ビルド時にCA/CR切り替える時に必要な情報をjsonファイルから取得
       - name: Get Build Switching info
         id: get_build_switching_info
