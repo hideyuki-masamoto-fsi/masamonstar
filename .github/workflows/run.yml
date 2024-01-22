@@ -35,8 +35,8 @@ jobs:
               Write-Host "$build_info get information"
             }
           }
-          echo "build_info=$build_info"
-          echo "build_info=$build_info" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
+          echo "build_info=$JsonFilePath"
+          echo "build_info=$JsonFilePath" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
 
   #値確認
   VALUE-CONFIRM:
