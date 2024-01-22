@@ -35,7 +35,7 @@ jobs:
               Write-Host "$build_info get information"
             }
           }
-
+          echo "build_info=$build_info"
           echo "build_info=$build_info" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
 
   #値確認
@@ -49,7 +49,6 @@ jobs:
           pwd
 
           #出力確認
-
           $build_info=${{ needs.Exec_ECU-Build.outputs.build_info }}
           echo "build_info=$build_info"
     
