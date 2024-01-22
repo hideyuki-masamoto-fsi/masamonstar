@@ -49,6 +49,6 @@ jobs:
           pwd
 
           #出力確認
-          $build_info=${{ needs.Exec_ECU-Build.outputs.build_info }}
-          echo "build_info=$build_info"
+          echo "$build_info=${{ needs.Exec_ECU-Build.outputs.build_info }}"
+          
     
