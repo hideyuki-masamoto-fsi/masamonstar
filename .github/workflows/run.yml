@@ -38,6 +38,24 @@ jobs:
           echo "build_info=$build_info"
           echo "build_info=$build_info" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
 
+          $input_compo==${{ needs.Exec_ECU-Build.env.input_compo }}
+          echo "$input_compo==${{ needs.Exec_ECU-Build.env.input_compo }}"
+          
+          $target="Mrf"
+          $targetcompo += "["
+
+          foreach ($compo in $input_compo) {
+            if ($compo -ne "$target") {
+              $targetcompo += "`""
+              $targetcompo += $compo
+              $targetcompo += "`""
+              $targetcompo += ","
+            }
+          }
+          $targetcompo += "]"
+          $targetcompo = $targetcompo -replace '\,]',']'
+          
+          echo "targetcompo=$targetcompo"
   #値確認
   VALUE-CONFIRM:
     runs-on: windows-latest
