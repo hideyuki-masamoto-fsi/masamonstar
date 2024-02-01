@@ -45,6 +45,7 @@ jobs:
           $targetcompo += "["
 
           foreach ($compo in $input_compo) {
+            echo "compo=$compo"
             if ($compo -ne "$target") {
               $targetcompo += "`""
               $targetcompo += $compo
