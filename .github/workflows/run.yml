@@ -38,8 +38,8 @@ jobs:
           echo "build_info=$build_info"
           echo "build_info=$build_info" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
 
-          $input_compo=${{ needs.Exec_ECU-Build.env.input_compo }}
-          echo "$input_compo=${{ needs.Exec_ECU-Build.env.input_compo }}"
+          $input_compo='["Mrf","Bsm","DestJdg","VehPred"]'
+          echo "$input_compo=$input_compo"
           
           $target="Mrf"
           $targetcompo += "["
