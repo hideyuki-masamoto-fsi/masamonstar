@@ -42,20 +42,15 @@ jobs:
           echo "$input_compo=$input_compo"
           
           $target="Mrf"
-          $targetcompo += "["
+          $targetcompo = @()
 
           foreach ($compo in ($input_compo | ConvertFrom-Json)) {
             echo "compo=$compo"
             if ($compo -ne "$target") {
-              $targetcompo += "`""
               $targetcompo += $compo
-              $targetcompo += "`""
-              $targetcompo += ","
             }
           }
-          $targetcompo += "]"
-          $targetcompo = $targetcompo -replace '\,]',']'
-          
+          $targetcompo = $targetcompo | ConvertTo-Json -Compress
           echo "targetcompo=$targetcompo"
   #値確認
   VALUE-CONFIRM:
