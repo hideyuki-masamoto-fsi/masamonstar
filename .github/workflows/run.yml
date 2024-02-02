@@ -44,7 +44,7 @@ jobs:
           $target="Mrf"
           $targetcompo += "["
 
-          foreach ($compo in $input_compo) {
+          foreach ($compo in ($input_compo | ConvertFrom-Json)) {
             echo "compo=$compo"
             if ($compo -ne "$target") {
               $targetcompo += "`""
