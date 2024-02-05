@@ -61,7 +61,14 @@ jobs:
       - name: value_confirm
         run: | 
           pwd
-
+          #変数作成
+          $arg1 = "argmenttest"
+          $arg2 = "argmenttest2"
+          $path = "${arg1}file"
+          echo "--- $path ---"
+          $path2 =Join-Path $arg1 $arg2
+          echo "--- $path2 ---"
+          
           #出力確認
           echo "$build_info=${{ needs.Exec_ECU-Build.outputs.build_info }}"
           
