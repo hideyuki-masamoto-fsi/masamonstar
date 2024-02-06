@@ -70,6 +70,8 @@ jobs:
           echo "--- $path2 ---"
           $path3 =Join-Path $path2 "${arg1}テスト結果.csv"
           echo "--- $path3 ---"
+          $path4= Join-Path C:/w "$arg2"
+          echo "--- $path4 ---"
           #出力確認
           echo "$build_info=${{ needs.Exec_ECU-Build.outputs.build_info }}"
           
