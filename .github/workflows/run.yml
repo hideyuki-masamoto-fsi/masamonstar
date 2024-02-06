@@ -51,8 +51,9 @@ jobs:
               $targetcompo += @( @{Name = $compo; Type = $test_type})
             }
           }
-          #$targetcompo = $targetcompo | ConvertTo-Json -Compress
-          echo "targetcompo=$targetcompo"
+          foreach ($item in $targetcompo) {
+            echo("Name: " + $item.Name + ", Type: " + $item.Type)
+          }
   #値確認
   VALUE-CONFIRM:
     runs-on: windows-latest
