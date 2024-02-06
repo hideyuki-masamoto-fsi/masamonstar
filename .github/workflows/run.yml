@@ -48,7 +48,7 @@ jobs:
             echo "compo=$compo"
             if ($compo -ne "$target") {
               $test_type = "csv"
-              targetcompo["$compo"] += "$test_type"
+              $targetcompo["$compo"] += "$test_type"
             }
           }
           #$targetcompo = $targetcompo | ConvertTo-Json -Compress
