@@ -42,7 +42,7 @@ jobs:
           echo "$input_compo=$input_compo"
           
           $target="Mrf"
-          declare -A targetcompo=()
+          $targetcompo = @()
 
           foreach ($compo in ($input_compo | ConvertFrom-Json)) {
             echo "compo=$compo"
