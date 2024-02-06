@@ -42,15 +42,16 @@ jobs:
           echo "$input_compo=$input_compo"
           
           $target="Mrf"
-          $targetcompo = @()
+          declare -A targetcompo=()
 
           foreach ($compo in ($input_compo | ConvertFrom-Json)) {
             echo "compo=$compo"
             if ($compo -ne "$target") {
-              $targetcompo += $compo
+              $test_type = "csv"
+              targetcompo[$compo] += $test_type
             }
           }
-          $targetcompo = $targetcompo | ConvertTo-Json -Compress
+          #$targetcompo = $targetcompo | ConvertTo-Json -Compress
           echo "targetcompo=$targetcompo"
   #値確認
   VALUE-CONFIRM:
