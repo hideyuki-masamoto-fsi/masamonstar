@@ -55,7 +55,8 @@ jobs:
             echo("Name: " + $item.Name + ", Type: " + $item.Type)
           }
           $key = "Bsm"
-          echo "$components" | jq -r ".$key"
+          result=$(echo "$targetcompo" | jq -r ".$key")
+          echo "$result"
   #値確認
   VALUE-CONFIRM:
     runs-on: windows-latest
