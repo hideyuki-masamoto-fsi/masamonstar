@@ -54,6 +54,8 @@ jobs:
           foreach ($item in $targetcompo) {
             echo("Name: " + $item.Name + ", Type: " + $item.Type)
           }
+          $key = "Bsm"
+          echo "$components" | jq -r ".$key"
   #値確認
   VALUE-CONFIRM:
     runs-on: windows-latest
