@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       targetcompo:  ${{ steps.create_unittest_brach.outputs.targetcompo }}
-      testtype:  ${{ steps.create_unittest_brach.outputs.targetcompo }}
+      testtype:  ${{ steps.create_unittest_brach.outputs.testtype }}
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python environment
@@ -52,7 +52,7 @@ jobs:
        echo "${targetcompo}"
        echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
 
-       testtype = '["csv","mix","csv","gtest","csv"]'
+       testtype='["csv","mix","csv","gtest","csv"]'
        echo "testtype=${testtype}" >> $GITHUB_OUTPUT
    
   Exec_GTestConvTool:
