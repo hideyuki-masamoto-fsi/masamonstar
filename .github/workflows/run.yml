@@ -52,28 +52,6 @@ jobs:
        echo "${targetcompo}"
        echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
 
-       $input_compo='["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
-       echo "$input_compo=$input_compo"
-       
-       $target="Mrf"
-       $targetcompo = @()
-
-       foreach ($compo in ($input_compo | ConvertFrom-Json)) {
-         echo "compo=$compo"
-         if ($compo -ne "Bsm"){
-           $test_type = "csv"
-         }else{
-           $test_type = "mix"
-         }
-         $targetcompo += @( @{Name = $compo; Type = $test_type})
-       }
-       foreach ($item in $targetcompo) {
-         echo("Name: " + $item.Name + ", Type: " + $item.Type)
-       }
-       $key = "Bsm"
-       $result = ($targetcompo | Where-Object { $_.Name -eq $key }).Type
-       echo "$result"
-
        testtype = '["csv","mix","csv","gtest","csv"]'
        echo "testtype=${testtype}" >> $GITHUB_OUTPUT
    
