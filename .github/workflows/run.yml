@@ -47,7 +47,11 @@ jobs:
           foreach ($compo in ($input_compo | ConvertFrom-Json)) {
             echo "compo=$compo"
             if ($compo -ne "$target") {
-              $test_type = "csv"
+              if ($compo -ne "Bsm"){
+                $test_type = "csv"
+              }else{
+                $test_type = "mix"
+              }
               $targetcompo += @( @{Name = $compo; Type = $test_type})
             }
           }
