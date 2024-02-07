@@ -55,7 +55,7 @@ jobs:
             echo("Name: " + $item.Name + ", Type: " + $item.Type)
           }
           $key = "Bsm"
-          result=$(echo "$targetcompo" | jq -r ".$key")
+          $result = ($targetcompo | Where-Object { $_.Name -eq $key }).Type
           echo "$result"
   #値確認
   VALUE-CONFIRM:
