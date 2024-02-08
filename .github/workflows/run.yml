@@ -56,8 +56,8 @@ jobs:
        testtype='["csv","mix","csv","gtest","csv"]'
        echo "testtype=${testtype}" >> $GITHUB_OUTPUT
 
-       echo "input_compo=${env.input_compo}"
-       echo "input_compo=${{fromJson( env.input_compo )}}"
+       #echo "input_compo=${env.input_compo}"
+       #echo "input_compo=${{fromJson( env.input_compo )}}"
    
   Exec_GTestConvTool:
     runs-on: ubuntu-latest
