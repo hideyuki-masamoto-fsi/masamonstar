@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       targetcompo:  ${{ steps.create_unittest_brach.outputs.targetcompo }}
-      testtype:  ${{ steps.create_unittest_brach.outputs.testtype }}
+      #testtype:  ${{ steps.create_unittest_brach.outputs.testtype }}
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python environment
@@ -64,7 +64,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{fromJson( needs.excel-graph.outputs.input_compo )}}
+        compolist: ${{fromJson( needs.excel-graph.outputs.targetcompo )}}
     steps:
       - name: Clean self-hosted runner
         run: |
@@ -78,7 +78,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{fromJson( needs.excel-graph.outputs.input_compo )}}
+        compolist: ${{fromJson( needs.excel-graph.outputs.targetcompo )}}
     steps:
       - name: Clean self-hosted runner
         run: |
