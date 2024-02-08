@@ -31,7 +31,7 @@ jobs:
        #echo "${targetcompo}"
        #echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
        #サンプル３(全コンポ)
-       $targetcompo=${{fromJson( env.input_compo )}}
+       targetcompo='["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
        echo "${targetcompo}"
        echo "0"
        $compo_testtype = @()
