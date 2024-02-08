@@ -54,6 +54,8 @@ jobs:
 
        testtype='["csv","mix","csv","gtest","csv"]'
        echo "testtype=${testtype}" >> $GITHUB_OUTPUT
+
+       echo "input_compo=${{ fromJson(needs.excel-graph.env.input_compo) }}"
    
   Exec_GTestConvTool:
     runs-on: ubuntu-latest
@@ -61,7 +63,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${ fromJson(needs.excel-graph.env.input_compo) }
+        compolist: ${{ fromJson(needs.excel-graph.env.input_compo) }}
     steps:
       - name: Clean self-hosted runner
         run: |
