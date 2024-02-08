@@ -13,34 +13,17 @@ jobs:
     env:
       #input_compo: "Tlmf"
       input_compo: '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     outputs:
       compo_testtype:  ${{ steps.create_unittest_brach.outputs.compo_testtype }}
       #testtype:  ${{ steps.create_unittest_brach.outputs.testtype }}
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python environment
-      uses: actions/setup-python@v3
-      with:
-        python-version: 3.9
-    - name: Install dependencies
-      run: |
-        pip install xlrd xlwt openpyxl
-        echo "schedule"
-    - name: Generate Excel file and graph
-      run: |
-        #cd ./src
-        #python generate_excel.py
-     #- name: Upload Excel file
-     # uses: actions/upload-artifact@v3
-     # with:
-     #   name: excel-graph
-     #   path: example.xls
     - name: Create UnitTest Branch
       id: create_unittest_brach
       run: |
        #サンプル１
-       echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c
+       #echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c
        #list=$(echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c)
        #echo "targetcompo=${list}" >> $GITHUB_OUTPUT
        #サンプル２(単体コンポ)
@@ -48,7 +31,7 @@ jobs:
        #echo "${targetcompo}"
        #echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
        #サンプル３(全コンポ)
-       targetcompo=$(echo '${{env.input_compo}}' | jq -c)
+       targetcompo=${{env.input_compo}}
        echo "${targetcompo}"
        echo "0"
        $compo_testtype = @()
@@ -65,7 +48,7 @@ jobs:
        foreach ($item in $compo_testtype) {
          echo("Name: " + $item.Name + ", Type: " + $item.Type)
        }
-       echo "compo_testtype=${compo_testtype}" >> $GITHUB_OUTPUT
+       echo compo_testtype=${compo_testtype}| Out-File -Append -FilePath $env:GITHUB_OUTPUT
 
        #testtype='["csv","mix","csv","gtest","csv"]'
        #echo "testtype=${testtype}" >> $GITHUB_OUTPUT
