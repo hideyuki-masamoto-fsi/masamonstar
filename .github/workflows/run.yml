@@ -61,7 +61,8 @@ jobs:
           $key = "Bsm"
           $result = ($targetcompo | Where-Object { $_.Name -eq $key }).Type
           echo "$result"
-          $targetcompo | ForEach-Object { echo $_.Name }
+          $test = $targetcompo | ForEach-Object { echo $_.Name }
+          echo "$test"
   #値確認
   VALUE-CONFIRM:
     runs-on: windows-latest
