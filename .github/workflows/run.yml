@@ -52,7 +52,7 @@ jobs:
        echo "${targetcompo}"
        $compo_testtype = @()
 
-       foreach ($compo in ($input_compo | ConvertFrom-Json)) {
+       foreach ($compo in ($targetcompo | ConvertFrom-Json)) {
          echo "compo=$compo"
          if ($compo -ne "Bsm"){
            $test_type = "csv"
