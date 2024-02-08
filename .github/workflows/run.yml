@@ -15,7 +15,7 @@ jobs:
       input_compo: "Tlmf,Lcd,Bsm,DestJdg,OmiArb"
     runs-on: ubuntu-latest
     outputs:
-      targetcompo:  ${{ steps.create_unittest_brach.outputs.targetcompo }}
+      compo_testtype:  ${{ steps.create_unittest_brach.outputs.compo_testtype }}
       #testtype:  ${{ steps.create_unittest_brach.outputs.testtype }}
     steps:
     - uses: actions/checkout@v3
@@ -50,10 +50,24 @@ jobs:
        #サンプル３(全コンポ)
        targetcompo=$(echo '${{env.input_compo}}' | jq -c)
        echo "${targetcompo}"
-       echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
+       $compo_testtype = @()
 
-       testtype='["csv","mix","csv","gtest","csv"]'
-       echo "testtype=${testtype}" >> $GITHUB_OUTPUT
+       foreach ($compo in ($input_compo | ConvertFrom-Json)) {
+         echo "compo=$compo"
+         if ($compo -ne "Bsm"){
+           $test_type = "csv"
+         }else{
+           $test_type = "mix"
+         }
+         $compo_testtype += @( @{Name = $compo; Type = $test_type})
+       }
+       foreach ($item in $compo_testtype) {
+         echo("Name: " + $item.Name + ", Type: " + $item.Type)
+       }
+       echo "compo_testtype=${compo_testtype}" >> $GITHUB_OUTPUT
+
+       #testtype='["csv","mix","csv","gtest","csv"]'
+       #echo "testtype=${testtype}" >> $GITHUB_OUTPUT
 
        #echo "input_compo=${env.input_compo}"
        #echo "input_compo=${{fromJson( env.input_compo )}}"
@@ -64,7 +78,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{fromJson( needs.excel-graph.outputs.targetcompo )}}
+        compolist: ${{fromJson( needs.excel-graph.outputs.compo_testtype )}}
     steps:
       - name: Clean self-hosted runner
         run: |
@@ -78,7 +92,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{fromJson( needs.excel-graph.outputs.targetcompo )}}
+        compolist: ${{fromJson( needs.excel-graph.outputs.compo_testtype )}}
     steps:
       - name: Clean self-hosted runner
         run: |
