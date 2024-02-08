@@ -12,8 +12,7 @@ jobs:
   excel-graph:
     env:
       #input_compo: "Tlmf"
-      #input_compo: '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
-      input_compo: '[1,2,3,4,5]'
+      input_compo: "Tlmf,Lcd,Bsm,DestJdg,OmiArb"
     runs-on: ubuntu-latest
     outputs:
       targetcompo:  ${{ steps.create_unittest_brach.outputs.targetcompo }}
@@ -65,7 +64,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{ fromJson(needs.excel-graph.env.input_compo) }}
+        compolist: ${{fromJson( needs.excel-graph.outputs.input_compo )}}
     steps:
       - name: Clean self-hosted runner
         run: |
