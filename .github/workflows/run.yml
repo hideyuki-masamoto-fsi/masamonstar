@@ -67,6 +67,7 @@ jobs:
         run: |
           echo "Exec_GTestConvTool"
           echo ${{ matrix.compolist }}
+          
 
   Exec_ECU-Build:
     runs-on: ubuntu-latest
@@ -74,7 +75,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{fromJson( needs.excel-graph.outputs.targetcompo )}}
+        compolist: ${{fromJson( needs.excel-graph.outputs.input_compo )}}
     steps:
       - name: Clean self-hosted runner
         run: |
