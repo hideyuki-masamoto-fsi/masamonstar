@@ -32,7 +32,7 @@ jobs:
        #echo "${targetcompo}"
        #echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
        #サンプル３(全コンポ)
-       $list==$(echo '${{env.input_compo}}' | jq -c)
+       $list=$(echo '${{env.input_compo}}' | jq -c)
        echo "list=${list}" >> $GITHUB_OUTPUT
        $targetcompo='["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
        echo "${targetcompo}"
