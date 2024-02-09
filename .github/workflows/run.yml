@@ -62,7 +62,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{fromJson(needs.excel-graph.outputs.compo_testtype) | map(attribute="Name")}}
+        compolist: ${{fromJson(needs.excel-graph.outputs.compo_testtype).map(e => e.Name)}}
     steps:
       - name: Clean self-hosted runner
         run: |
