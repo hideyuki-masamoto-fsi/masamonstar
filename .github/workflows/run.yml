@@ -62,7 +62,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{fromJson( needs.excel-graph.outputs.compo_testtype ) | Where-Object { $_.Name -eq $key }).Type }}
+        compolist: ${{fromJson( needs.excel-graph.outputs.compo_testtype )| ForEach-Object { echo $_.Name }}}
     steps:
       - name: Clean self-hosted runner
         run: |
