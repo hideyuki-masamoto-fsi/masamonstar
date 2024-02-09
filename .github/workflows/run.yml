@@ -15,6 +15,7 @@ jobs:
       input_compo: '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
     runs-on: windows-latest
     outputs:
+      list:  ${{ steps.create_unittest_brach.outputs.list }}
       compo_testtype:  ${{ steps.create_unittest_brach.outputs.compo_testtype }}
       targetcompolist:  ${{ steps.create_unittest_brach.outputs.targetcompolist }}
     steps:
@@ -31,6 +32,8 @@ jobs:
        #echo "${targetcompo}"
        #echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
        #サンプル３(全コンポ)
+       list='["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
+       echo "list=${list}" >> $GITHUB_OUTPUT
        $targetcompo='["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
        echo "${targetcompo}"
        echo "0"
@@ -65,7 +68,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{fromJson( needs.excel-graph.outputs.targetcompolist )}}
+        compolist: ${{fromJson( needs.excel-graph.outputs.list )}}
     steps:
       - name: Clean self-hosted runner
         run: |
@@ -79,7 +82,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{fromJson( needs.excel-graph.outputs.targetcompolist )}}
+        compolist: ${{needs.excel-graph.outputs.targetcompolist}}
     steps:
       - name: Clean self-hosted runner
         run: |
