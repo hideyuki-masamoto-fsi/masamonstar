@@ -21,7 +21,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Install jq
-      run: sudo apt-get install -y jq
+      run: |
+        choco install jq
       shell: powershell
     - name: Create UnitTest Branch
       id: create_unittest_brach
