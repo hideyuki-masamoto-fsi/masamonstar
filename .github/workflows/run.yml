@@ -20,6 +20,8 @@ jobs:
       targetcompolist:  ${{ steps.create_unittest_brach.outputs.targetcompolist }}
     steps:
     - uses: actions/checkout@v3
+    - name: Install jq
+      run: sudo apt-get install -y jq
     - name: Create UnitTest Branch
       id: create_unittest_brach
       run: |
