@@ -20,10 +20,6 @@ jobs:
       targetcompolist:  ${{ steps.create_unittest_brach.outputs.targetcompolist }}
     steps:
     - uses: actions/checkout@v3
-    - name: Install jq
-      run: |
-        choco install jq
-      shell: powershell
     - name: Create UnitTest Branch
       id: create_unittest_brach
       run: |
@@ -72,7 +68,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{fromJson( needs.excel-graph.outputs.list )}}
+        compolist: ${{needs.excel-graph.outputs.list}}
     steps:
       - name: Clean self-hosted runner
         run: |
