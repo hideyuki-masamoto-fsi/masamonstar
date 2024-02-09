@@ -16,7 +16,7 @@ jobs:
     runs-on: windows-latest
     outputs:
       compo_testtype:  ${{ steps.create_unittest_brach.outputs.compo_testtype }}
-      #testtype:  ${{ steps.create_unittest_brach.outputs.testtype }}
+      targetcompolist:  ${{ steps.create_unittest_brach.outputs.targetcompolist }}
     steps:
     - uses: actions/checkout@v3
     - name: Create UnitTest Branch
@@ -55,6 +55,8 @@ jobs:
 
        #echo "input_compo=${env.input_compo}"
        #echo "input_compo=${{fromJson( env.input_compo )}}"
+       $targetcompo = $compo_testtype | ForEach-Object { echo $_.Name }
+       echo "targetcompolist=${targetcompo}" >> $GITHUB_OUTPUT
    
   Exec_GTestConvTool:
     runs-on: ubuntu-latest
@@ -62,7 +64,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{fromJson(needs.excel-graph.outputs.compo_testtype).Name}}
+        compolist: ${{fromJson( needs.excel-graph.outputs.targetcompolist )}}
     steps:
       - name: Clean self-hosted runner
         run: |
@@ -76,7 +78,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{fromJson( needs.excel-graph.outputs.compo_testtype )}}
+        compolist: ${{fromJson( needs.excel-graph.outputs.targetcompolist )}}
     steps:
       - name: Clean self-hosted runner
         run: |
