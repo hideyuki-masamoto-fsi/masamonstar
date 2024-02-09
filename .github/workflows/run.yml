@@ -56,6 +56,7 @@ jobs:
        #echo "input_compo=${env.input_compo}"
        #echo "input_compo=${{fromJson( env.input_compo )}}"
        $targetcompo = $compo_testtype | ForEach-Object { echo $_.Name }
+       echo "$targetcompo"
        echo "targetcompolist=${targetcompo}" >> $GITHUB_OUTPUT
    
   Exec_GTestConvTool:
