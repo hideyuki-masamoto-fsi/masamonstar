@@ -67,7 +67,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{needs.excel-graph.outputs.compo_list}}
+        compolist: ${{fromJson(needs.excel-graph.outputs.compo_list)}}
     uses: ./.github/workflows/call_start.yml
     with:
       input_compo: ${{ matrix.compolist }}
