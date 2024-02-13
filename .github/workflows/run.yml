@@ -71,7 +71,7 @@ jobs:
     uses: ./.github/workflows/call_start.yml
     with:
       input_compo: ${{ matrix.compolist }}
-      save_result_branch: 'no'
+      select_core_partition: 'no'
     secrets: inherit
           
 
