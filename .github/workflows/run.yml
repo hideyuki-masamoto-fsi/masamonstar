@@ -63,16 +63,19 @@ jobs:
        echo "compo_list=$compo_list" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
 
   Exec_GTestConvTool:
+    runs-on: windows-latest
     needs: excel-graph
     strategy:
       max-parallel: 2
       matrix:
         compolist: ${{fromJson(needs.excel-graph.outputs.compo_list)}}
-    uses: ./.github/workflows/call_start.yml
-    with:
-      input_compo: ${{ matrix.compolist }}
-      select_core_partition: 'no'
-    secrets: inherit
+    steps:
+      - name: yml start
+        run: |
+          ./.github/workflows/call_start.yml
+          with:
+            input_compo: ${{ matrix.compolist }}
+            select_core_partition: 'no'
           
 
   Exec_ECU-Build:
@@ -81,7 +84,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{needs.excel-graph.outputs.compo_list}}
+        compolist: ${{fromJson(needs.excel-graph.outputs.compo_list)}}
     if: always()
     steps:
       - name: Clean self-hosted runner
