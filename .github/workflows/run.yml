@@ -72,7 +72,7 @@ jobs:
     steps:
       - name: yml start
         run: |
-          ./.github/workflows/call_start.yml
+          call_start.yml
           with:
             input_compo: ${{ matrix.compolist }}
             select_core_partition: 'no'
