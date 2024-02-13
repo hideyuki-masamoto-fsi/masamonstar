@@ -15,7 +15,7 @@ jobs:
       input_compo: '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
     runs-on: windows-latest
     outputs:
-      list:  ${{ steps.create_unittest_brach.outputs.list }}
+      compo_list:  ${{ steps.create_unittest_brach.outputs.compo_list }}
       compo_testtype:  ${{ steps.create_unittest_brach.outputs.compo_testtype }}
       targetcompolist:  ${{ steps.create_unittest_brach.outputs.targetcompolist }}
     steps:
@@ -23,18 +23,6 @@ jobs:
     - name: Create UnitTest Branch
       id: create_unittest_brach
       run: |
-       #サンプル１
-       #echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c
-       #list=$(echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c)
-       #echo "targetcompo=${list}" >> $GITHUB_OUTPUT
-       #サンプル２(単体コンポ)
-       #targetcompo=$(echo '["${{env.input_compo}}"]' | jq -c)
-       #echo "${targetcompo}"
-       #echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
-       #サンプル３(全コンポ)
-       $list=$(echo '${{env.input_compo}}' | jq -c)
-       echo "list=${list}" >> $GITHUB_OUTPUT
-       echo "list=${list}"
        $targetcompo='["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
        #echo "${targetcompo}"
        echo "0"
@@ -52,17 +40,28 @@ jobs:
        foreach ($item in $compo_testtype) {
          echo("Name: " + $item.Name + ", Type: " + $item.Type)
        }
-       echo compo_testtype=${compo_testtype}| Out-File -Append -FilePath $env:GITHUB_OUTPUT
+       echo compo_testtype=$compo_testtype| Out-File -Append -FilePath $env:GITHUB_OUTPUT
 
        #testtype='["csv","mix","csv","gtest","csv"]'
        #echo "testtype=${testtype}" >> $GITHUB_OUTPUT
 
        #echo "input_compo=${env.input_compo}"
        #echo "input_compo=${{fromJson( env.input_compo )}}"
-       $targetcompo = $compo_testtype | ForEach-Object { echo $_.Name }
-       echo "$targetcompo"
-       echo "targetcompolist=${targetcompo}" >> $GITHUB_OUTPUT
-   
+
+       $compo_list += "["
+       echo "compo_list=$compo_list"
+
+       foreach ($comp_info in $compo_testtype) {
+          $compo_list += "`""
+          $compo_list += $comp_info.Name
+          $compo_list += "`""
+          $compo_list += ","
+       }
+       $compo_list += "]"
+       $compo_list = $compo_list -replace '\,]',']'
+       echo "compo_list_2=$compo_list"
+       echo "compo_list=$compo_list" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
+
   Exec_GTestConvTool:
     runs-on: ubuntu-latest
     needs: excel-graph
