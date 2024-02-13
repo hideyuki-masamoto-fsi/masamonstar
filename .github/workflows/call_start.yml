@@ -25,4 +25,4 @@ jobs:
     steps:
       - name: echo pwd
         run: |
-          echo "--- pwd ---"
+          echo "inputs=${{inputs.input_compo}}"
