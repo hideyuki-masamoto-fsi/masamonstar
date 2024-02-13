@@ -84,6 +84,7 @@ jobs:
       max-parallel: 2
       matrix:
         compolist: ${{needs.excel-graph.outputs.compo_list}}
+    if: always()
     steps:
       - name: Clean self-hosted runner
         run: |
