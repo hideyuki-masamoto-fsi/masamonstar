@@ -37,32 +37,26 @@ jobs:
           }
           echo "build_info=$build_info"
           echo "build_info=$build_info" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
-
-          $input_compo='["Mrf","Bsm","DestJdg","VehPred"]'
-          echo "$input_compo=$input_compo"
+          
+          $input_compo==${{ needs.Exec_ECU-Build.env.input_compo }}
+          echo "$input_compo==${{ needs.Exec_ECU-Build.env.input_compo }}"
           
           $target="Mrf"
-          $targetcompo = @()
+          $targetcompo += "["
 
-          foreach ($compo in ($input_compo | ConvertFrom-Json)) {
-            echo "compo=$compo"
+          foreach ($compo in $input_compo) {
             if ($compo -ne "$target") {
-              if ($compo -ne "Bsm"){
-                $test_type = "csv"
-              }else{
-                $test_type = "mix"
-              }
-              $targetcompo += @( @{Name = $compo; Type = $test_type})
+              $targetcompo += "`""
+              $targetcompo += $compo
+              $targetcompo += "`""
+              $targetcompo += ","
             }
           }
-          foreach ($item in $targetcompo) {
-            echo("Name: " + $item.Name + ", Type: " + $item.Type)
-          }
-          $key = "Bsm"
-          $result = ($targetcompo | Where-Object { $_.Name -eq $key }).Type
-          echo "$result"
-          $test = $targetcompo | ForEach-Object { echo $_.Name }
-          echo "$test"
+          $targetcompo += "]"
+          $targetcompo = $targetcompo -replace '\,]',']'
+          
+          echo "targetcompo=$targetcompo"
+
   #値確認
   VALUE-CONFIRM:
     runs-on: windows-latest
@@ -72,17 +66,7 @@ jobs:
       - name: value_confirm
         run: | 
           pwd
-          #変数作成
-          $arg1 = "argmenttest"
-          $arg2 = "argmenttest2"
-          $path = "${arg1}file"
-          echo "--- $path ---"
-          $path2 =Join-Path $arg1 $arg2
-          echo "--- $path2 ---"
-          $path3 =Join-Path $path2 "${arg1}テスト結果.csv"
-          echo "--- $path3 ---"
-          $path4= Join-Path C:/w "$arg2"
-          echo "--- $path4 ---"
+
           #出力確認
           echo "$build_info=${{ needs.Exec_ECU-Build.outputs.build_info }}"
           
