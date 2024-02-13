@@ -78,6 +78,10 @@ jobs:
         compolist: ${{fromJson(needs.excel-graph.outputs.compo_list)}}
     steps:
     - uses: actions/checkout@v3
+    - name: check
+      run: |
+        dir /s
+
     - name: yml start
       uses: ./.github/workflows/call_start.yml
       with:
