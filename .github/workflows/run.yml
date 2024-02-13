@@ -39,6 +39,7 @@ jobs:
        #echo "${targetcompo}"
        echo "0"
        #$compo_testtype = @()
+       $compo_testtype += "["
        echo "1"
        foreach ($compo in ($targetcompo | ConvertFrom-Json)) {
          echo "compo=$compo"
@@ -47,8 +48,11 @@ jobs:
          }else{
            $test_type = "mix"
          }
-         $compo_testtype += @( @{Name = $compo; Type = $test_type})
+         $compo_testtype += @( @{Name = "$compo"; Type = "$test_type"})
        }
+       $compo_testtype += "]"
+       $compo_testtype = $compo_testtype -replace '\,]',']'
+       echo "targetcompo_info2=$compo_testtype"
        foreach ($item in $compo_testtype) {
          echo("Name: " + $item.Name + ", Type: " + $item.Type)
        }
