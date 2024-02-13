@@ -71,15 +71,10 @@ jobs:
         compolist: ${{fromJson(needs.excel-graph.outputs.compo_list)}}
     steps:
       - name: yml start
-        run: |
-          dir
-          
-          ./.github/workflows/call_start.yml
-          with:
-            input_compo: ${{ matrix.compolist }}
-            select_core_partition: 'no'
-　　　　　secrets: inherit
-          
+        uses: ./.github/workflows/call_start.yml
+        with:
+          input_compo: ${{ matrix.compolist }}
+          select_core_partition: 'no'
 
   Exec_ECU-Build:
     runs-on: windows-latest
