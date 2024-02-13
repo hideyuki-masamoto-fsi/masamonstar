@@ -49,6 +49,7 @@ jobs:
            $test_type = "mix"
          }
          $compo_testtype += @( @{Name = "$compo"; Type = "$test_type"})
+         $compo_testtype += ","
        }
        $compo_testtype += "]"
        $compo_testtype = $compo_testtype -replace '\,]',']'
