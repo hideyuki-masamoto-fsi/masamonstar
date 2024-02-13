@@ -70,7 +70,7 @@ jobs:
         compolist: ${{needs.excel-graph.outputs.compo_list}}
     uses: ./.github/workflows/call_start.yml
     with:
-      conv_compo: ${{ matrix.compolist }}
+      input_compo: ${{ matrix.compolist }}
       save_result_branch: 'no'
     secrets: inherit
           
