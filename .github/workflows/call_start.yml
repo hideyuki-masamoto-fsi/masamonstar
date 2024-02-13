@@ -1,0 +1,33 @@
+name: build CI
+on:
+  workflow_dispatch:
+    inputs:
+      input_mod:
+        description: 'Please enter the branch name.'
+        required: true
+      input_compo:
+        description: 'Please enter the compo .'
+        required: true
+      select_core_partition:
+        description: 'Please select the Core .'
+        required: true
+        type: choice
+        options:
+          - "main"
+          - "start"
+  workflow_call:
+    inputs:
+      input_mod:
+        type: string
+      input_compo:
+        type: string
+      select_core_partition:
+        type: string
+
+jobs:
+  Exec-docker-ECU-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo pwd
+        run: |
+          echo "--- pwd ---"
