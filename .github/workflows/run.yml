@@ -95,7 +95,7 @@ jobs:
 
   Exec_ECU-Build:
     runs-on: windows-latest
-    needs: excel-graph
+    needs: [Exec_GTestConvTool]
     strategy:
       max-parallel: 2
       matrix:
