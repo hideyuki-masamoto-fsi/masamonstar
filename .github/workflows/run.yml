@@ -79,7 +79,7 @@ jobs:
     steps:
     - name: check
       run: |
-        dir
+        pwd
 
     - name: yml start
       uses: ./.github/workflows/call_start.yml
