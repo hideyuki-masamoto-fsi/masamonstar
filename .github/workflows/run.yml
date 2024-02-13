@@ -72,8 +72,7 @@ jobs:
     steps:
       - name: yml start
         run: |
-          pwd
-          cd ./.github/workflows/
+          dir
           call_start.yml
           with:
             input_compo: ${{ matrix.compolist }}
