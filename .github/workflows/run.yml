@@ -76,12 +76,12 @@ jobs:
           
 
   Exec_ECU-Build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: excel-graph
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{fromJson(needs.excel-graph.outputs.compo_lis)}}
+        compolist: ${{needs.excel-graph.outputs.compo_list}}
     if: always()
     steps:
       - name: Clean self-hosted runner
