@@ -13,7 +13,7 @@ jobs:
     env:
       #input_compo: "Tlmf"
       input_compo: '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     outputs:
       list:  ${{ steps.create_unittest_brach.outputs.list }}
       compo_testtype:  ${{ steps.create_unittest_brach.outputs.compo_testtype }}
