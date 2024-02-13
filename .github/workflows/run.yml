@@ -9,65 +9,71 @@ on:
  
     
 jobs:
-  Exec_ECU-Build:
+  excel-graph:
     env:
-      #input_compo: "Mrf"
-      input_compo: '["Mrf","Bsm","DestJdg","VehPred"]'
-    runs-on: windows-latest
+      #input_compo: "Tlmf"
+      input_compo: '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
+    runs-on: ubuntu-latest
     outputs:
-      build_info: ${{ steps.get_build_switching_info.outputs.build_info}}
+      targetcompo:  ${{ steps.create_unittest_brach.outputs.targetcompo }}
     steps:
-      - uses: actions/checkout@v3
-      #・ビルド時にCA/CR切り替える時に必要な情報をjsonファイルから取得
-      - name: Get Build Switching info
-        id: get_build_switching_info
+    - uses: actions/checkout@v3
+    - name: Set up Python environment
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      run: |
+        pip install xlrd xlwt openpyxl
+        echo "schedule"
+    - name: Generate Excel file and graph
+      run: |
+        #cd ./src
+        #python generate_excel.py
+     #- name: Upload Excel file
+     # uses: actions/upload-artifact@v3
+     # with:
+     #   name: excel-graph
+     #   path: example.xls
+    - name: Create UnitTest Branch
+      id: create_unittest_brach
+      run: |
+       #サンプル１
+       echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c
+       #list=$(echo '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]' | jq -c)
+       #echo "targetcompo=${list}" >> $GITHUB_OUTPUT
+       #サンプル２(単体コンポ)
+       #targetcompo=$(echo '["${{env.input_compo}}"]' | jq -c)
+       #echo "${targetcompo}"
+       #echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
+       #サンプル３(全コンポ)
+       targetcompo=$(echo '${{env.input_compo}}' | jq -c)
+       echo "${targetcompo}"
+       echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
+   
+  Exec_GTestConvTool:
+    runs-on: ubuntu-latest
+    needs: excel-graph
+    strategy:
+      max-parallel: 2
+      matrix:
+        compolist: ${{fromJson( needs.excel-graph.outputs.targetcompo )}}
+    steps:
+      - name: Clean self-hosted runner
         run: |
-          #CA/CR情報を取得するためのjsonファイル
-          pwd
-          cd ./.github/workflows
+          echo "Exec_GTestConvTool"
+          echo ${{ matrix.compolist }}
 
-          $JsonFilePath = "choices.json"
-          $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
-
-          foreach ($cmp_info in $JsonData.PSObject.Properties.Value) {
-            if ($cmp_info.node_name -eq "Mrf") {
-              $build_info = $cmp_info.core_partition
-              Write-Host "$build_info get information"
-            }
-          }
-          echo "build_info=$build_info"
-          echo "build_info=$build_info" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
-          
-          $input_compo==${{ needs.Exec_ECU-Build.env.input_compo }}
-          echo "$input_compo==${{ needs.Exec_ECU-Build.env.input_compo }}"
-          
-          $target="Mrf"
-          $targetcompo += "["
-
-          foreach ($compo in $input_compo) {
-            if ($compo -ne "$target") {
-              $targetcompo += "`""
-              $targetcompo += $compo
-              $targetcompo += "`""
-              $targetcompo += ","
-            }
-          }
-          $targetcompo += "]"
-          $targetcompo = $targetcompo -replace '\,]',']'
-          
-          echo "targetcompo=$targetcompo"
-
-  #値確認
-  VALUE-CONFIRM:
-    runs-on: windows-latest
-    needs: [Exec_ECU-Build]
-    name: VALUE-CONFIRM
+  Exec_ECU-Build:
+    runs-on: ubuntu-latest
+    needs: excel-graph
+    strategy:
+      max-parallel: 2
+      matrix:
+        compolist: ${{fromJson( needs.excel-graph.outputs.targetcompo )}}
     steps:
-      - name: value_confirm
-        run: | 
-          pwd
-
-          #出力確認
-          echo "$build_info=${{ needs.Exec_ECU-Build.outputs.build_info }}"
-          
-    
+      - name: Clean self-hosted runner
+        run: |
+          echo "Exec_ECU-Build"
+          echo ${{ matrix.compolist }}
+        
