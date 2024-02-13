@@ -73,10 +73,12 @@ jobs:
       - name: yml start
         run: |
           dir
-          call_start.yml
+          
+          ./.github/workflows/call_start.yml
           with:
             input_compo: ${{ matrix.compolist }}
             select_core_partition: 'no'
+　　　　　secrets: inherit
           
 
   Exec_ECU-Build:
