@@ -63,18 +63,17 @@ jobs:
        echo "compo_list=$compo_list" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
 
   Exec_GTestConvTool:
-    runs-on: windows-latest
     needs: excel-graph
     strategy:
       max-parallel: 2
       matrix:
         compolist: ${{needs.excel-graph.outputs.compo_list}}
-    if: ${{ matrix.compolist }} != 'csv'
-    steps:
-      - name: Clean self-hosted runner
-        run: |
-          echo "Exec_GTestConvTool"
-          echo ${ matrix.compolist }
+    uses: ./.github/workflows/call_start.yml
+    with:
+      conv_compo: ${{ matrix.compolist }}
+      make_result_branch: 'no'
+      build_target: 'no'
+    secrets: inherit
           
 
   Exec_ECU-Build:
