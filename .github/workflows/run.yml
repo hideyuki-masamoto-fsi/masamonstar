@@ -69,7 +69,7 @@ jobs:
       max-parallel: 2
       matrix:
         compolist: ${{needs.excel-graph.outputs.compo_list}}
-    if: matrix.complist != "csv"
+    if: ${matrix.complist} != "csv"
     steps:
       - name: Clean self-hosted runner
         run: |
