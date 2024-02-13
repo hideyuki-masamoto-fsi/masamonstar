@@ -63,7 +63,7 @@ jobs:
        echo "compo_list=$compo_list" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
 
   Exec_GTestConvTool:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: excel-graph
     strategy:
       max-parallel: 2
