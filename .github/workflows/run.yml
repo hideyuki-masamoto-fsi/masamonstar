@@ -13,7 +13,7 @@ jobs:
     env:
       #input_compo: "Tlmf"
       input_compo: '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     outputs:
       list:  ${{ steps.create_unittest_brach.outputs.list }}
       compo_testtype:  ${{ steps.create_unittest_brach.outputs.compo_testtype }}
@@ -64,7 +64,7 @@ jobs:
        echo "targetcompolist=${targetcompo}" >> $GITHUB_OUTPUT
    
   Exec_GTestConvTool:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: excel-graph
     strategy:
       max-parallel: 2
@@ -78,7 +78,7 @@ jobs:
           
 
   Exec_ECU-Build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: excel-graph
     strategy:
       max-parallel: 2
