@@ -32,13 +32,13 @@ jobs:
        #echo "${targetcompo}"
        #echo "targetcompo=${targetcompo}" >> $GITHUB_OUTPUT
        #サンプル３(全コンポ)
-       list=$(echo '${{env.input_compo}}' | jq -c)
+       $list=$(echo '${{env.input_compo}}' | jq -c)
        echo "list=${list}" >> $GITHUB_OUTPUT
        echo "list=${list}"
-       #$targetcompo='["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
+       $targetcompo='["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
        #echo "${targetcompo}"
        echo "0"
-       $compo_testtype = @()
+       #$compo_testtype = @()
        echo "1"
        foreach ($compo in ($targetcompo | ConvertFrom-Json)) {
          echo "compo=$compo"
