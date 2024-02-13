@@ -80,6 +80,7 @@ jobs:
     - name: check
       run: |
         pwd
+        dir
 
     - name: yml start
       uses: ./.github/workflows/call_start.yml
