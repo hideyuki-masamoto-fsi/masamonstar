@@ -82,9 +82,13 @@ jobs:
       run: |
         pwd
         dir
+        cd ./.github
+        dir
+        cd ./workflows
+        dir
 
     - name: yml start
-      uses: ./.github/workflows/call_start.yml
+      uses: ./call_start.yml
       with:
         input_compo: ${{ matrix.compolist }}
         select_core_partition: 'no'
