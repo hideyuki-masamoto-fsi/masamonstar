@@ -81,7 +81,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{needs.excel-graph.outputs.compo_list}}
+        compolist: ${{fromJson(needs.excel-graph.outputs.compo_lis)}}
     if: always()
     steps:
       - name: Clean self-hosted runner
