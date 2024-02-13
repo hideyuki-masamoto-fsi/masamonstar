@@ -67,11 +67,21 @@ jobs:
       run: |
         echo "compo=Tlmf"
         
-       
+  Exec_Tool:
+    needs: excel-graph
+    strategy:
+      max-parallel: 2
+      matrix:
+        compolist: ${{fromJson(needs.excel-graph.outputs.compo_list)}}      
+    uses: ./.github/workflows/call_start.yml
+    with:
+      input_compo: ${{ matrix.compolist }}
+      select_core_partition: 'no'
+    secrets: inherit
 
   Exec_GTestConvTool:
     runs-on: windows-latest
-    needs: excel-graph
+    needs: [excel-graph,Exec_Tool]
     strategy:
       max-parallel: 2
       matrix:
@@ -86,7 +96,6 @@ jobs:
         dir
         cd ./workflows
         dir
-
     - name: yml start
       uses: ./.github/workflows/call_start
       with:
