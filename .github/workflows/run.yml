@@ -96,7 +96,7 @@ jobs:
         #echo "test_compo_type_list=${test_compo_type_list}"
         #echo "type=$(${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq "${{ matrix.compolist }} }).Type}}"
         #$test_type=($test_compo_type_list | Where-Object { $_.Name -eq "${{ matrix.compolist }}" }).Type
-        $test_type=(${{ needs.excel-graph.outputs.compo_testtype }} | Where-Object { $_.Name -eq "${{ matrix.compolist }}" }).Type
+        $test_type=($${{ needs.excel-graph.outputs.compo_testtype }} | Where-Object { $_.Name -eq "${{ matrix.compolist }}" }).Type
         echo "test_type=${test_type}"
   Exec_ECU-Build:
     runs-on: windows-latest
