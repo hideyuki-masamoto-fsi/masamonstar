@@ -44,11 +44,8 @@ jobs:
        echo "compo_testtype=$compo_testtype"
        $test_type = ($compo_testtype | Where-Object { $_.Name -eq 'Bsm' }).Type
        echo "testtype=${test_type}"
-       #$test_type = (\(compo_testtype | Where-Object {\)_.Name -eq 'Bsm'}).Type
-       echo "testtype2=${test_type}"
-       echo "testtype3=$test_type"
-       #testtype='["csv","mix","csv","gtest","csv"]'
-       #echo "testtype=${testtype}" >> $GITHUB_OUTPUT
+       $test_type1 = $compo_testtype['Bsm']
+       echo "testtype1=${test_type1}"
 
        #echo "input_compo=${env.input_compo}"
        #echo "input_compo=${{fromJson( env.input_compo )}}"
@@ -74,7 +71,7 @@ jobs:
         echo "compo_if=$_.Name"
         echo "compo_if=${{ steps.create_unittest_brach.outputs.compo_testtype }}"
         $compo_testtype=${{ steps.create_unittest_brach.outputs.compo_testtype }}
-        $test_type = ($compo_testtype | Where-Object { $_.Name -eq 'Bsm' }).Type
+        $test_type = ($compo_testtype.Values | Where-Object { $_.Name -eq 'Bsm' }).Type
         echo "testtype=${test_type}"
 
   Exec_GTestConvTool:
@@ -95,7 +92,7 @@ jobs:
         cd ./workflows
         dir
     - name: Create UnitTest Branch
-      if :  (${needs.excelgraph.outputs.compo_testtype} | Where-Object { $_.Name -eq '${{ matrix.compolist }}' }).Type == 'csv'
+      if :  ($needs.excelgraph.outputs.compo_testtype.Values | Where-Object { $_.Name -eq '${{ matrix.compolist }}' }).Type == 'csv'
       run: |
         echo "compo_if=${{ needs.excelgraph.outputs.compo_testtype }}"
         echo "compo=${{ matrix.compolist }}"
@@ -104,7 +101,7 @@ jobs:
         #echo "type=$(${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq "${{ matrix.compolist }} }).Type}}"
         #$test_type=($test_compo_type_list | Where-Object { $_.Name -eq "${{ matrix.compolist }}" }).Type
         #$test_type=(${{ needs.excelgraph.outputs.compo_testtype }}.GetEnumerator() | Where-Object { $_.Name -eq "${{ matrix.compolist }}" }).Type
-        $test_type = ($needs.excelgraph.outputs.compo_testtype | Where-Object { $_.Name -eq 'Bsm' }).Type
+        $test_type = ($needs.excelgraph.outputs.compo_testtype.Values | Where-Object { $_.Name -eq 'Bsm' }).Type
         echo "test_type=${test_type}"
         foreach ($item in $(needs.excelgraph.outputs.compo_testtype)) {
           echo("Name: " + $item.Name + ", Type: " + $item.Type)
