@@ -70,7 +70,7 @@ jobs:
         echo "compo=Tlmf"
         echo "compo_if=$_.Name"
         echo "compo_if=${{ steps.create_unittest_brach.outputs.compo_testtype }}"
-        $test_type = (${{ steps.create_unittest_brach.outputs.compo_testtype }}.Values | Where-Object { $_.Name -eq 'Bsm' }).Type
+        $test_type = ($steps.create_unittest_brach.outputs.compo_testtype.Values | Where-Object { $_.Name -eq 'Bsm' }).Type
         echo "testtype=${test_type}"
 
   Exec_GTestConvTool:
