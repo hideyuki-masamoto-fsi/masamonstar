@@ -87,7 +87,6 @@ jobs:
     - name: yml start
       shell: powershell
       run: |
-        Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
         ./.github/workflows/call_start.yml --input_compo ${{ matrix.compolist }} --select_core_partition 'no'
 
   Exec_ECU-Build:
