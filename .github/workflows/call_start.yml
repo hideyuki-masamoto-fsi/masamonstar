@@ -26,3 +26,7 @@ jobs:
       - name: echo pwd
         run: |
           echo "inputs=${{inputs.input_compo}}"
+          echo "Hello" > hello.txt
+          dir
+
+          
