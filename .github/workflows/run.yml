@@ -92,7 +92,7 @@ jobs:
         cd ./workflows
         dir
     - name: Create UnitTest Branch
-      if :  (${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq '${{ matrix.compolist }}' }).Type == 'csv'
+      if :  (${{ needs.excel-graph.outputs.compo_testtype }} | Where-Object { $_.Name -eq '${{ matrix.compolist }}' }).Type == 'csv'
       run: |
         echo "compo_if=${{ needs.excel-graph.outputs.compo_testtype }}"
         echo "compo=${{ matrix.compolist }}"
@@ -101,8 +101,8 @@ jobs:
         #echo "type=$(${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq "${{ matrix.compolist }} }).Type}}"
         #$test_type=($test_compo_type_list | Where-Object { $_.Name -eq "${{ matrix.compolist }}" }).Type
         #$test_type=(${{ needs.excel-graph.outputs.compo_testtype }}.GetEnumerator() | Where-Object { $_.Name -eq "${{ matrix.compolist }}" }).Type
-        $test_type=${ needs.excel-graph.outputs.compo_testtype | Where-Object {$_.Name -eq "start"} | Select-Object -ExpandProperty Type }
-        echo "test_type=${test_type}"
+        #$test_type=${ needs.excel-graph.outputs.compo_testtype | Where-Object {$_.Name -eq "start"} | Select-Object -ExpandProperty Type }
+        #echo "test_type=${test_type}"
   Exec_ECU-Build:
     runs-on: windows-latest
     needs: [excel-graph,Exec_GTestConvTool]
