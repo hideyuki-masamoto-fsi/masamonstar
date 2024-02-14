@@ -94,6 +94,8 @@ jobs:
       if :  ($needs.excelgraph.outputs.compo_testtype.Values | Where-Object { $_.Name -eq '${{ matrix.compolist }}' }).Type == 'csv'
       run: |
         echo "compo_if=${{ needs.excelgraph.outputs.compo_testtype }}"
+        echo "compo_value=${{ needs.excelgraph.outputs.compo_testtype.Name }}"
+        echo "compo_key=${{ needs.excelgraph.outputs.compo_testtype.Type }}"
         echo "compo=${{ matrix.compolist }}"
         #$test_compo_type_list=${{ needs.excelgraph.outputs.compo_testtype }}
         #echo "test_compo_type_list=${test_compo_type_list}"
@@ -102,7 +104,7 @@ jobs:
         #$test_type=(${{ needs.excelgraph.outputs.compo_testtype }}.GetEnumerator() | Where-Object { $_.Name -eq "${{ matrix.compolist }}" }).Type
         $test_type = ($needs.excelgraph.outputs.compo_testtype.Values | Where-Object { $_.Name -eq 'Bsm' }).Type
         echo "test_type=${test_type}"
-        foreach ($item in $needs.excelgraph.outputs.compo_testtype.Values) {
+        foreach ($item in $needs.excelgraph.outputs.compo_testtype) {
           echo "item=$item"
           echo("Name: " + $item.Name + ", Type: " + $item.Type)
         }
