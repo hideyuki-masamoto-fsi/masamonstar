@@ -90,9 +90,9 @@ jobs:
     - name: Create UnitTest Branch
       if :  (${{ needs.excel-graph.outputs.compo_testtype }} | Where-Object { $_.Name -eq ${{ matrix.compolist }} }).Type == 'csv'
       run: |
-        echo "compo_if=${{ steps.excel-graph.outputs.compo_testtype }}"
+        echo "compo_if=${{ needs.excel-graph.outputs.compo_testtype }}"
         echo "compo=${{ matrix.compolist }}"
-        $test_compo_type_list=${{ steps.create_unittest_brach.outputs.compo_testtype }}
+        $test_compo_type_list=${{ needs.excel-graph.outputs.compo_testtype }}
         echo "test_compo_type_list=${test_compo_type_list}"
         #echo "type=$(${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq "${{ matrix.compolist }} }).Type}}"
         $test_type=($test_compo_type_list | Where-Object { $_.Name -eq "${{ matrix.compolist }}" }).Type
