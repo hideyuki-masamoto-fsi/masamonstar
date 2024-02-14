@@ -40,7 +40,7 @@ jobs:
        foreach ($item in $compo_testtype) {
          echo("Name: " + $item.Name + ", Type: " + $item.Type)
        }
-       echo "compo_testtype=$compo_testtype" >> $GITHUB_OUTPUT
+       echo "compo_testtype=$compo_testtype" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
        echo "compo_testtype=$compo_testtype"
        $test_type = ($compo_testtype | Where-Object { $_.Name -eq 'Bsm' }).Type
        echo "testtype=${test_type}"
