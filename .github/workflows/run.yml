@@ -9,7 +9,7 @@ on:
  
     
 jobs:
-  excel-graph:
+  excelgraph:
     env:
       #input_compo: "Tlmf"
       input_compo: '["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
@@ -76,11 +76,11 @@ jobs:
 
   Exec_GTestConvTool:
     runs-on: windows-latest
-    needs: excel-graph
+    needs: excelgraph
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{fromJson(needs.excel-graph.outputs.compo_list)}}
+        compolist: ${{fromJson(needs.excelgraph.outputs.compo_list)}}
     steps:
     - uses: actions/checkout@v3
     - name: check
@@ -92,24 +92,24 @@ jobs:
         cd ./workflows
         dir
     - name: Create UnitTest Branch
-      if :  ($needs.excel-graph.outputs.compo_testtype | Where-Object { $_.Name -eq '${{ matrix.compolist }}' }).Type == 'csv'
+      if :  ($needs.excelgraph.outputs.compo_testtype | Where-Object { $_.Name -eq '${{ matrix.compolist }}' }).Type == 'csv'
       run: |
-        echo "compo_if=${{ needs.excel-graph.outputs.compo_testtype }}"
+        echo "compo_if=${{ needs.excelgraph.outputs.compo_testtype }}"
         echo "compo=${{ matrix.compolist }}"
-        #$test_compo_type_list=${{ needs.excel-graph.outputs.compo_testtype }}
+        #$test_compo_type_list=${{ needs.excelgraph.outputs.compo_testtype }}
         #echo "test_compo_type_list=${test_compo_type_list}"
         #echo "type=$(${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq "${{ matrix.compolist }} }).Type}}"
         #$test_type=($test_compo_type_list | Where-Object { $_.Name -eq "${{ matrix.compolist }}" }).Type
-        #$test_type=(${{ needs.excel-graph.outputs.compo_testtype }}.GetEnumerator() | Where-Object { $_.Name -eq "${{ matrix.compolist }}" }).Type
-        $test_type=($needs.excel-graph.outputs.compo_testtype | Where-Object { $_.Name -eq 'Bsm' }).Type
+        #$test_type=(${{ needs.excelgraph.outputs.compo_testtype }}.GetEnumerator() | Where-Object { $_.Name -eq "${{ matrix.compolist }}" }).Type
+        $test_type=($needs.excelgraph.outputs.compo_testtype | Where-Object { $_.Name -eq 'Bsm' }).Type
         echo "test_type=${test_type}"
   Exec_ECU-Build:
     runs-on: windows-latest
-    needs: [excel-graph,Exec_GTestConvTool]
+    needs: [excelgraph,Exec_GTestConvTool]
     strategy:
       max-parallel: 2
       matrix:
-        compolist: ${{fromJson(needs.excel-graph.outputs.compo_list)}}
+        compolist: ${{fromJson(needs.excelgraph.outputs.compo_list)}}
     if: always()
     steps:
       - name: Clean self-hosted runner
