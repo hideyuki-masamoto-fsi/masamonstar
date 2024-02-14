@@ -68,6 +68,7 @@ jobs:
       run: |
         echo "compo=Tlmf"
         echo "compo_if=$_.Name"
+        echo "compo_if=${{ steps.create_unittest_brach.outputs.compo_testtype }}"
 
   Exec_GTestConvTool:
     runs-on: windows-latest
