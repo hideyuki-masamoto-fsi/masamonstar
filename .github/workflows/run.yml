@@ -89,7 +89,7 @@ jobs:
       run: |
         echo "compo=${{ matrix.compolist }}"
         #echo "type=$(${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq ${{ matrix.compolist }} }).Type}}"
-        $test_type=(${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq ${{ matrix.compolist }} }).Type
+        $test_type=(${{ needs.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq ${{ matrix.compolist }} }).Type
         echo "test_type=$test_type"
   Exec_ECU-Build:
     runs-on: windows-latest
