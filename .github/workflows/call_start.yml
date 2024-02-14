@@ -28,5 +28,6 @@ jobs:
           echo "inputs=${{inputs.input_compo}}"
           echo "Hello" > hello.txt
           dir
+          echo "::notice::call start"
 
           
