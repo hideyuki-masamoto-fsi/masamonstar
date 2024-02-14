@@ -103,7 +103,12 @@ jobs:
         $test_type = ($needs.excelgraph.outputs.compo_testtype.Values | Where-Object { $_.Name -eq 'Bsm' }).Type
         echo "test_type=${test_type}"
         foreach ($item in $needs.excelgraph.outputs.compo_testtype.Values) {
+          echo "item=$item"
           echo("Name: " + $item.Name + ", Type: " + $item.Type)
+        }
+        foreach ($item.values in $needs.excelgraph.outputs.compo_testtype.Values) {
+          echo "item=$item.values"
+          echo("Name1: " + $item.Name + ", Type1: " + $item.Type)
         }
   Exec_ECU-Build:
     runs-on: windows-latest
