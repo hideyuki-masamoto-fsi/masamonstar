@@ -73,7 +73,7 @@ jobs:
         echo "compo=Tlmf"
         echo "compo_if=$_.Name"
         echo "compo_if=${{ steps.create_unittest_brach.outputs.compo_testtype }}"
-        compo_testtype=${{ steps.create_unittest_brach.outputs.compo_testtype }}
+        $compo_testtype=${{ steps.create_unittest_brach.outputs.compo_testtype }}
         $test_type = ($compo_testtype | Where-Object { $_.Name -eq 'Bsm' }).Type
         echo "testtype=${test_type}"
 
