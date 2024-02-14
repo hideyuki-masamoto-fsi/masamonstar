@@ -106,10 +106,7 @@ jobs:
           echo "item=$item"
           echo("Name: " + $item.Name + ", Type: " + $item.Type)
         }
-        foreach ($item.values in $needs.excelgraph.outputs.compo_testtype.Values) {
-          echo "item=$item.values"
-          echo("Name1: " + $item.Name + ", Type1: " + $item.Type)
-        }
+
   Exec_ECU-Build:
     runs-on: windows-latest
     needs: [excelgraph,Exec_GTestConvTool]
