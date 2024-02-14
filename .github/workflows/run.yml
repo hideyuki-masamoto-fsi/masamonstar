@@ -96,6 +96,8 @@ jobs:
         echo "compo_if=${{ needs.excelgraph.outputs.compo_testtype }}"
         echo "compo_value=${{ needs.excelgraph.outputs.compo_testtype.keys }}"
         echo "compo_key=${{ needs.excelgraph.outputs.compo_testtype.Type }}"
+        echo "compo_value=${{ needs.excelgraph.outputs.compo_testtype }}.keys"
+        echo "compo_key=${{ needs.excelgraph.outputs.compo_testtype.Count }}"        
         echo "compo=${{ matrix.compolist }}"
         #$test_compo_type_list=${{ needs.excelgraph.outputs.compo_testtype }}
         #echo "test_compo_type_list=${test_compo_type_list}"
