@@ -66,22 +66,10 @@ jobs:
       if :  (${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq 'Tlmf' }).Type == 'csv'
       run: |
         echo "compo=Tlmf"
-        
-  Exec_Tool:
-    needs: excel-graph
-    strategy:
-      max-parallel: 2
-      matrix:
-        compolist: ${{fromJson(needs.excel-graph.outputs.compo_list)}}      
-    uses: ./.github/workflows/call_start.yml
-    with:
-      input_compo: ${{ matrix.compolist }}
-      select_core_partition: 'no'
-    secrets: inherit
 
   Exec_GTestConvTool:
     runs-on: windows-latest
-    needs: [excel-graph,Exec_Tool]
+    needs: excel-graph
     strategy:
       max-parallel: 2
       matrix:
@@ -96,11 +84,10 @@ jobs:
         dir
         cd ./workflows
         dir
-    - name: yml start
-      uses: ./.github/workflows/call_start
-      with:
-        input_compo: ${{ matrix.compolist }}
-        select_core_partition: 'no'
+    - name: Create UnitTest Branch
+      if :  (${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq ${{ matrix.compolist }} }).Type == 'csv'
+      run: |
+        echo "compo=${{ matrix.compolist }}"
 
   Exec_ECU-Build:
     runs-on: windows-latest
