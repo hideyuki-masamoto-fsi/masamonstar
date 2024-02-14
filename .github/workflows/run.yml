@@ -68,7 +68,7 @@ jobs:
        echo "compo_list=$compo_list" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
        
     - name: Create UnitTest Branch
-      if :  (${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { \)_.Name -eq 'Tlmf' }).Type == 'csv'
+      if :  (${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq 'Bsm' }).Typee == 'csv'
       run: |
         echo "compo=Tlmf"
         echo "compo_if=$_.Name"
@@ -92,7 +92,7 @@ jobs:
         cd ./workflows
         dir
     - name: Create UnitTest Branch
-      if :  (${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq "${{ matrix.compolist }} }).Type == 'csv'
+      if :  (${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq 'Bsm' }).Type == 'csv'
       run: |
         echo "compo_if=${{ needs.excel-graph.outputs.compo_testtype }}"
         echo "compo=${{ matrix.compolist }}"
