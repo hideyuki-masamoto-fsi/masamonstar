@@ -44,8 +44,8 @@ jobs:
        echo "compo_testtype=$compo_testtype"
        $test_type = ($compo_testtype | Where-Object { $_.Name -eq 'Bsm' }).Type
        echo "testtype=${test_type}"
-       $test_type1 = $compo_testtype['Bsm']
-       echo "testtype1=${test_type1}"
+       #$test_type1 = $compo_testtype['Bsm']
+       #echo "testtype1=${test_type1}"
 
        #echo "input_compo=${env.input_compo}"
        #echo "input_compo=${{fromJson( env.input_compo )}}"
