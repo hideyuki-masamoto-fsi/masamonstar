@@ -41,7 +41,8 @@ jobs:
          echo("Name: " + $item.Name + ", Type: " + $item.Type)
        }
        echo compo_testtype=$compo_testtype| Out-File -Append -FilePath $env:GITHUB_OUTPUT
-
+       echo compo_testtype=$compo_testtype
+       
        #testtype='["csv","mix","csv","gtest","csv"]'
        #echo "testtype=${testtype}" >> $GITHUB_OUTPUT
 
@@ -63,7 +64,7 @@ jobs:
        echo "compo_list=$compo_list" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
        
     - name: Create UnitTest Branch
-      if :  (${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq 'Tlmf' }).Type == 'csv'
+      if :  (${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { \)_.Name -eq 'Tlmf' }).Type == 'csv'
       run: |
         echo "compo=Tlmf"
         echo "compo_if=$_.Name"
