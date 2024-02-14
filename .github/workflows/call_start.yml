@@ -29,5 +29,6 @@ jobs:
           echo "Hello" > hello.txt
           dir
           echo "::notice::call start"
+        shell: powershell
 
           
