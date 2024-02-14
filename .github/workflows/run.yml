@@ -42,7 +42,7 @@ jobs:
        }
        echo "compo_testtype=$compo_testtype" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
        echo "compo_testtype=$compo_testtype"
-       $test_type = ($compo_testtype | Where-Object { $_.Name -eq "Bsm" }).Type
+       $test_type = ($compo_testtype | Where-Object { $_.Name -eq 'Bsm' }).Type
        echo "testtype=${testtype}"
        #testtype='["csv","mix","csv","gtest","csv"]'
        #echo "testtype=${testtype}" >> $GITHUB_OUTPUT
