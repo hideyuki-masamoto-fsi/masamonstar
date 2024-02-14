@@ -66,6 +66,7 @@ jobs:
       if :  (${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq 'Tlmf' }).Type == 'csv'
       run: |
         echo "compo=Tlmf"
+        echo "compo_if=$_.Name"
 
   Exec_GTestConvTool:
     runs-on: windows-latest
@@ -85,7 +86,7 @@ jobs:
         cd ./workflows
         dir
     - name: Create UnitTest Branch
-      if :  (${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq ${{ matrix.compolist }} }).Type == 'csv'
+      if :  (${{ needs.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq ${{ matrix.compolist }} }).Type == 'csv'
       run: |
         echo "compo=${{ matrix.compolist }}"
         $test_compo_type_list=${{ steps.create_unittest_brach.outputs.compo_testtype }}
