@@ -72,7 +72,7 @@ jobs:
           $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
           $compolist += "["
 
-          foreach ($compo in (${{steps.excelgraph.outputs.compo_list}} | ConvertFrom-Json)) {
+          foreach ($compo in (${{steps.create_unittest_brach.outputs.compo_list}} | ConvertFrom-Json)) {
             foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
               if ($comp_info.node_name -eq "$comp") {
                 $testtype = $comp_info.test_type
