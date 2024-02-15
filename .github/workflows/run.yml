@@ -73,6 +73,8 @@ jobs:
           $compolist += "["
 
           echo "compolist_start=${{fromJson(steps.create_unittest_brach.outputs.compo_list)}}"
+          echo "compolist_start1=(${{fromJson(steps.create_unittest_brach.outputs.compo_list)}} | ConvertFrom-Json)"
+          echo "compolist_start2=${fromJson(steps.create_unittest_brach.outputs.compo_list)}"
           $compoList = $fromJson(steps.create_unittest_brach.outputs.compo_list)
 
           #foreach ($compo in $steps.create_unittest_brach.outputs.compo_list) {
