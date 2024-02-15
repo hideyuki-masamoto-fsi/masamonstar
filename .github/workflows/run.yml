@@ -116,10 +116,22 @@ jobs:
           echo "item=$item"
           echo("Name: " + $item.Name + ", Type: " + $item.Type)
         }
-        $targetcompo = "${{ matrix.compolist }}"
+        $targetcompo = ${{matrix.com}}
         $JsonFilePath = "./.github/workflows/choices.json"
         $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
-        $testtype = $targetcompo | ConvertFrom-Json | ForEach-Object { \(JsonData.\)_.test_type }
+        
+        foreach ($compo in ($targetcompo | ConvertFrom-Json)) {
+        	foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
+        	  if ($comp_info.node_name -eq "$comp") {
+        	    $testtype = $comp_info.test_type
+        	  }
+        	}
+        }
+        echo "testtype=$testtype"
+        #$targetcompo = "${{ matrix.compolist }}"
+        #$JsonFilePath = "./.github/workflows/choices.json"
+        #$JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
+        #$testtype = $targetcompo | ConvertFrom-Json | ForEach-Object { \(JsonData.\)_.test_type }
   Exec_ECU-Build:
     runs-on: windows-latest
     needs: [excelgraph,Exec_GTestConvTool]
