@@ -74,6 +74,7 @@ jobs:
            echo "node_name=$comp_info.node_name"
            echo "compo=$compo"
            if ($comp_info.node_name -eq '${{inputs.input_compo}}') {
+             echo "HAppy = ${{inputs.input_compo}}"
              echo "comp_info=$comp_info"
              $testtype = $comp_info.test_type
            }
