@@ -26,6 +26,7 @@ jobs:
        $info_compo = 'Bsm'
        if($info_compo -eq '${{env.input_compo}}'){
         echo "Happy"
+        echo "${{env.input_compo}}"
         echo "'${{env.input_compo}}'"
        }
 
