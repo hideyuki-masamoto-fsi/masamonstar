@@ -122,6 +122,10 @@ jobs:
           $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
           $compolist += "["
 
+          echo "compolist_start0=${{needs.excelgraph.outputs.compo_list}}"
+          #echo "compolist_start=${{fromJson(needs.excelgraph.outputs.compo_list)}}"
+
+
           echo "compolist_start=${{fromJson(needs.excelgraph.outputs.compo_list)}}"
           echo "compolist_start1=(${{fromJson(needs.excelgraph.outputs.compo_list)}} | ConvertFrom-Json)"
           echo "compolist_start2=${fromJson(needs.excelgraph.outputs.compo_list)}"
