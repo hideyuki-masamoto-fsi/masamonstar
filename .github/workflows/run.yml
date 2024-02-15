@@ -119,13 +119,11 @@ jobs:
         $targetcompo = ${{matrix.com}}
         $JsonFilePath = "./.github/workflows/choices.json"
         $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
-        
-        foreach ($compo in ($targetcompo | ConvertFrom-Json)) {
-        	foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
-        	  if ($comp_info.node_name -eq "$comp") {
-        	    $testtype = $comp_info.test_type
-        	  }
-        	}
+
+        foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
+          if ($comp_info.node_name -eq "$targetcompo") {
+            $testtype = $comp_info.test_type
+          }
         }
         echo "testtype=$testtype"
         #$targetcompo = "${{ matrix.compolist }}"
