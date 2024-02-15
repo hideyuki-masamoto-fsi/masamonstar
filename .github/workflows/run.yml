@@ -25,7 +25,7 @@ jobs:
       run: |
        $info_compo='Bsm'
        echo "input_node='${{inputs.input_node}}'"
-       if($info_compo -eq '${{inputs.input_node}}'){
+       if($info_compo -eq ${{inputs.input_node}}){
         echo "Happy"
         echo "$info_compo"
         echo "${{inputs.input_node}}"
