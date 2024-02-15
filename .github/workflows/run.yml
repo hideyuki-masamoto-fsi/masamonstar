@@ -65,6 +65,29 @@ jobs:
        echo "compo_list_2=$compo_list"
        echo "compo_list=$compo_list" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
        
+       #foreach ($compo in $steps.create_unittest_brach.outputs.compo_list) {
+       foreach ($compo in $compo_list ) {
+         foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
+           if ($comp_info.node_name -eq "$comp") {
+             $testtype = $comp_info.test_type
+           }
+         }
+         # 取得したテスト種別がcsv(csvのみ実施)・gtest(gtestのみ実施)・mix(csvとgtestを実施)に該当しない場合、エラーとする
+         if ($testtype -eq 'csv' -or $testtype -eq 'gtest' -or $testtype -eq 'mix') {
+           # コンポを格納
+           $compolist += "`""
+           $compolist += $node_name
+           $compolist += "`""
+           $compolist += ","
+         } else {
+           $error_comment="【ERROR】There is an error in the test type : $testtype : compo : $compo ."
+           echo "::error::$error_comment"
+         }
+       }
+       $compolist += "]"
+       $compolist = $compolist -replace '\,]',']'
+
+       echo "complist=$compolist"
     - name: Create UnitTest Branch
       if :  (${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq 'Bsm' }).Type == 'csv'
       run: |
