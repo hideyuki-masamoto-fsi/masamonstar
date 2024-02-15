@@ -41,6 +41,7 @@ jobs:
          echo("Name: " + $item.Name + ", Type: " + $item.Type)
        }
        echo "compo_testtype=$compo_testtype" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
+       echo "compo_testtype=$compo_testtype" >> $GITHUB_ENV
        echo "compo_testtype=$compo_testtype"
        $test_type = ($compo_testtype | Where-Object { $_.Name -eq 'Bsm' }).Type
        echo "testtype=${test_type}"
@@ -107,9 +108,12 @@ jobs:
         $test_type = ($needs.excelgraph.outputs.compo_testtype.Values | Where-Object { $_.Name -eq 'Bsm' }).Type
         echo "test_type=${test_type}"
         $compo_all_type = ${ needs.excelgraph.outputs.compo_testtype }
+        $compo_all_type_env = env.compo_testtype
+        $compo_all_type_env = ${env.compo_testtype}
         $compo_all_type = '${ needs.excelgraph.outputs.compo_testtype }'
         $compo_all_type = ${{ fromJson(needs.excelgraph.outputs.compo_testtype) }}
         echo "compo_all_type=$compo_all_type"
+        echo "compo_all_type_env=$compo_all_type_env"
         foreach ($item in $compo_all_type ) {
           echo "start"
           echo "item=$item"
