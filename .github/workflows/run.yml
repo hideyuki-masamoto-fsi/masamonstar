@@ -65,12 +65,15 @@ jobs:
        echo "compo_list_2=$compo_list"
        echo "compo_list=$compo_list" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
        
+       $JsonFilePath = ".github/workflows/choices.json"
+       $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
        #foreach ($compo in $steps.create_unittest_brach.outputs.compo_list) {
        foreach ($compo in $compo_list | ConvertFrom-Json ) {
          foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
+           
            echo "node_name=$comp_info.node_name"
            echo "comp=$comp"
-           if ($comp_info.node_name -eq '$comp') {
+           if ($comp_info.node_name -eq "$comp") {
              echo "comp_info=$comp_info"
              $testtype = '$comp_info.test_type'
            }
