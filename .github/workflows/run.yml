@@ -123,7 +123,7 @@ jobs:
         foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
           echo "node_name=$comp_info.node_name"
           echo "targetcompo=$targetcompo"
-          if ($comp_info.node_name -eq '$targetcompo') {
+          if ($comp_info.node_name -eq "$targetcompo") {
             echo "test_type_add = $comp_info.test_type"
             $testtype = $comp_info.test_type
           }
