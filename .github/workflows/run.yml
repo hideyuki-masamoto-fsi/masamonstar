@@ -105,9 +105,9 @@ jobs:
         #echo "type=$(${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq "${{ matrix.compolist }} }).Type}}"
         #$test_type=($test_compo_type_list | Where-Object { $_.Name -eq "${{ matrix.compolist }}" }).Type
         #$test_type=(${{ needs.excelgraph.outputs.compo_testtype }}.GetEnumerator() | Where-Object { $_.Name -eq "${{ matrix.compolist }}" }).Type
-        $test_type = ($needs.excelgraph.outputs.compo_testtype.Values | Where-Object { $_.Name -eq 'Bsm' }).Type
-        echo "test_type=${test_type}"
-        $compo_all_type = ${ needs.excelgraph.outputs.compo_testtype }
+        #$test_type = ($needs.excelgraph.outputs.compo_testtype.Values | Where-Object { $_.Name -eq 'Bsm' }).Type
+        #echo "test_type=${test_type}"
+        #$compo_all_type = ${ needs.excelgraph.outputs.compo_testtype }
         #$compo_all_type_env = env.compo_testtype
         #$compo_all_type_env = ${env.compo_testtype}
         $compo_all_type = '${ needs.excelgraph.outputs.compo_testtype }'
