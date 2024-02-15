@@ -108,7 +108,7 @@ jobs:
         echo "test_type=${test_type}"
         $compo_all_type = ${ needs.excelgraph.outputs.compo_testtype }
         $compo_all_type = '${ needs.excelgraph.outputs.compo_testtype }'
-        #compo_all_type = ${{ needs.excelgraph.outputs.compo_testtype }}
+        $compo_all_type = ${{ fromJson(needs.excelgraph.outputs.compo_testtype) }}
         echo "compo_all_type=$compo_all_type"
         foreach ($item in $compo_all_type ) {
           echo "start"
