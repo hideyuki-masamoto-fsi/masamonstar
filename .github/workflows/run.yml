@@ -129,7 +129,7 @@ jobs:
           #$compoList = $fromJson(needs.excelgraph.outputs.compo_list)
 
           #foreach ($compo in $steps.create_unittest_brach.outputs.compo_list) {
-          foreach ($compo in ${{fromJson(needs.excelgraph.outputs.compo_list)}} ) {
+          foreach ($compo in $${{fromJson(needs.excelgraph.outputs.compo_list)}} ) {
             foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
               if ($comp_info.node_name -eq "$comp") {
                 $testtype = $comp_info.test_type
