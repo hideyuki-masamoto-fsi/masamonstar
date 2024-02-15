@@ -131,7 +131,8 @@ jobs:
         #$targetcompo = "${{ matrix.compolist }}"
         #$JsonFilePath = ".github/workflows/choices.json"
         #$JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
-        #$testtype = $targetcompo | ConvertFrom-Json | ForEach-Object { \(JsonData.\)_.test_type }
+        $testtype1 = $targetcompo | ForEach-Object { \(JsonData.\)_.test_type }
+        echo "testtype1=$testtype1"
   Exec_ECU-Build:
     runs-on: windows-latest
     needs: [excelgraph,Exec_GTestConvTool]
