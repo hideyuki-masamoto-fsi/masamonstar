@@ -116,6 +116,10 @@ jobs:
           echo "item=$item"
           echo("Name: " + $item.Name + ", Type: " + $item.Type)
         }
+        $targetcompo = ${{ matrix.compolist }}
+        $JsonFilePath = "./choise.json"
+        $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
+        $testtype = $targetcompo | ConvertFrom-Json | ForEach-Object { \(JsonData.\)_.test_type }
   Exec_ECU-Build:
     runs-on: windows-latest
     needs: [excelgraph,Exec_GTestConvTool]
