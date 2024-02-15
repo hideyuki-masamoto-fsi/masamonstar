@@ -92,34 +92,9 @@ jobs:
         cd ./workflows
         dir
     - name: Create UnitTest Branch
-      #if :  ($needs.excelgraph.outputs.compo_testtype | Where-Object { $_.Name -eq '${{ matrix.compolist }}' }).Type == 'csv'
       run: |
-        #echo "compo_if=${{ needs.excelgraph.outputs.compo_testtype }}"
-        #echo "compo_value=${{ needs.excelgraph.outputs.compo_testtype.keys }}"
-        #echo "compo_key=${{ needs.excelgraph.outputs.compo_testtype.Type }}"
-        #echo "compo_value=${{ needs.excelgraph.outputs.compo_testtype }}.keys"
-        #echo "compo_key=${{ needs.excelgraph.outputs.compo_testtype.Count }}"        
-        #echo "compo=${{ matrix.compolist }}"
         echo "compo"
-        #$test_compo_type_list=${{ needs.excelgraph.outputs.compo_testtype }}
-        #echo "test_compo_type_list=${test_compo_type_list}"
-        #echo "type=$(${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq "${{ matrix.compolist }} }).Type}}"
-        #$test_type=($test_compo_type_list | Where-Object { $_.Name -eq "${{ matrix.compolist }}" }).Type
-        #$test_type=(${{ needs.excelgraph.outputs.compo_testtype }}.GetEnumerator() | Where-Object { $_.Name -eq "${{ matrix.compolist }}" }).Type
-        #$test_type = ($needs.excelgraph.outputs.compo_testtype.Values | Where-Object { $_.Name -eq 'Bsm' }).Type
-        #echo "test_type=${test_type}"
-        #$compo_all_type = ${ needs.excelgraph.outputs.compo_testtype }
-        #$compo_all_type_env = env.compo_testtype
-        #$compo_all_type_env = ${env.compo_testtype}
-        #$compo_all_type = '${ needs.excelgraph.outputs.compo_testtype }'
-        #$compo_all_type = ${{ fromJson(needs.excelgraph.outputs.compo_testtype) }}
-        #echo "compo_all_type=$compo_all_type"
-        #echo "compo_all_type_env=$compo_all_type_env"
-        #foreach ($item in $compo_all_type ) {
-          #echo "start"
-          #echo "item=$item"
-          #echo("Name: " + $item.Name + ", Type: " + $item.Type)
-        #}
+
 
   Exec_ECU-Build:
     runs-on: windows-latest
