@@ -72,7 +72,7 @@ jobs:
           $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
           $compolist += "["
 
-          echo "compolist_start=${{steps.create_unittest_brach.outputs.compo_list}}"
+          echo "compolist_start=${{fromJson(steps.create_unittest_brach.outputs.compo_list)}}"
 
           #foreach ($compo in $steps.create_unittest_brach.outputs.compo_list) {
           foreach ($compo in $(${fromJson(steps.create_unittest_brach.outputs.compo_list)}) ) {
