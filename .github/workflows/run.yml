@@ -133,7 +133,7 @@ jobs:
         #$JsonFilePath = ".github/workflows/choices.json"
         #$JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
         $testtype1 = $JsonData.$targetcompo.test_type
-        $testtype2 = $JsonData.$targetcompo
+        \(testtype2 = (ConvertFrom-Json (Get-Content "./.github/workflows/choices.json" -Raw)).Value | Where-Object {\)_.node_name -eq "$"} | Select-Object -ExpandProperty test_type
         echo "testtype1=$testtype1"
         echo "testtype2=$testtype2"
   Exec_ECU-Build:
