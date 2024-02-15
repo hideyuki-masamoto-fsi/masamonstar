@@ -24,11 +24,11 @@ jobs:
       id: create_unittest_brach
       run: |
        $info_compo='Bsm'
-       echo "input_node='${{env.input_node}}'"
-       if($info_compo -eq '${{env.input_node}}'){
+       echo "input_node='${{inputs.input_node}}'"
+       if($info_compo -eq '${{inputs.input_node}}'){
         echo "Happy"
-        echo "${{env.input_node}}"
-        echo "'${{env.input_node}}'"
+        echo "${{inputs.input_node}}"
+        echo "'${{inputs.input_node}}'"
        }
 
        $targetcompo='["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
