@@ -129,7 +129,7 @@ jobs:
         }
         echo "testtype=$testtype"
         #$targetcompo = "${{ matrix.compolist }}"
-        #$JsonFilePath = "./.github/workflows/choices.json"
+        #$JsonFilePath = ".github/workflows/choices.json"
         #$JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
         #$testtype = $targetcompo | ConvertFrom-Json | ForEach-Object { \(JsonData.\)_.test_type }
   Exec_ECU-Build:
