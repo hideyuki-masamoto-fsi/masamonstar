@@ -118,7 +118,7 @@ jobs:
         dir
         cd ./workflows
         dir
-          $JsonFilePath = ".github/workflows/choices.json"
+          $JsonFilePath = "choices.json"
           $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
           $compolist += "["
 
