@@ -118,6 +118,39 @@ jobs:
         dir
         cd ./workflows
         dir
+          $JsonFilePath = ".github/workflows/choices.json"
+          $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
+          $compolist += "["
+
+          echo "compolist_start=${{fromJson(needs.excelgraph.outputs.compo_list)}}"
+          echo "compolist_start1=(${{fromJson(sneeds.excelgraph.outputs.compo_list)}} | ConvertFrom-Json)"
+          echo "compolist_start2=${fromJson(needs.excelgraph.outputs.compo_list)}"
+          echo "compolist_start3=${{fromJson($needs.excelgraph.outputs.compo_list)}}"
+          #$compoList = $fromJson(needs.excelgraph.outputs.compo_list)
+
+          #foreach ($compo in $steps.create_unittest_brach.outputs.compo_list) {
+          foreach ($compo in ${{fromJson(needs.excelgraph.outputs.compo_list)}} ) {
+            foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
+              if ($comp_info.node_name -eq "$comp") {
+                $testtype = $comp_info.test_type
+              }
+            }
+            # 取得したテスト種別がcsv(csvのみ実施)・gtest(gtestのみ実施)・mix(csvとgtestを実施)に該当しない場合、エラーとする
+            if ($testtype -eq 'csv' -or $testtype -eq 'gtest' -or $testtype -eq 'mix') {
+              # コンポを格納
+              $compolist += "`""
+              $compolist += $node_name
+              $compolist += "`""
+              $compolist += ","
+            } else {
+              $error_comment="【ERROR】There is an error in the test type : $testtype : compo : $compo ."
+              echo "::error::$error_comment"
+            }
+          }
+          $compolist += "]"
+          $compolist = $compolist -replace '\,]',']'
+
+          echo "complist=$compolist"
     - name: Create UnitTest Branch
       run: |
         echo "compo"
