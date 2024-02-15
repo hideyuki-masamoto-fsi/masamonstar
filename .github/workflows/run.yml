@@ -105,6 +105,7 @@ jobs:
         echo "compo_all_type_env1=$compo_all_type_env1"
         foreach ($item in $compo_all_type_env1 ) {
           echo "start1"
+          echo "$compo_all_type_env1"
           echo "item=$item"
           echo("Name: " + $item.Name + ", Type: " + $item.Type)
         }
