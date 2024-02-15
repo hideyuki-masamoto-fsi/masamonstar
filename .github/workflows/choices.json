@@ -2,28 +2,24 @@
     "Mrfusion": {
         "node_name": "Mrf",
         "stub_path": "TBD",
-        "test_type": "csv",
         "core_partition": "base_cr",
         "test_type": "csv"
     },
     "BsmApplications": {
         "node_name": "Bsm",
         "stub_path": "TBD",
-        "test_type": "TBD",
         "core_partition": "base_cr",
         "test_type": "csv"
     },
     "DestJdgnJudge": {
         "node_name": "DestJdg",
         "stub_path": "TBD",
-        "test_type": "TBD",
         "core_partition": "base_cr",
         "test_type": "gtest"
     },
     "VehPredPrediction": {
         "node_name": "VehPred",
         "stub_path": "TBD",
-        "test_type": "TBD",
         "core_partition": "base_cr",
         "test_type": "mix"
     }
