@@ -109,11 +109,11 @@ jobs:
         echo "test_type=${test_type}"
         $compo_all_type = ${ needs.excelgraph.outputs.compo_testtype }
         #$compo_all_type_env = env.compo_testtype
-        $compo_all_type_env = ${env.compo_testtype}
+        #$compo_all_type_env = ${env.compo_testtype}
         $compo_all_type = '${ needs.excelgraph.outputs.compo_testtype }'
         #$compo_all_type = ${{ fromJson(needs.excelgraph.outputs.compo_testtype) }}
         echo "compo_all_type=$compo_all_type"
-        echo "compo_all_type_env=$compo_all_type_env"
+        #echo "compo_all_type_env=$compo_all_type_env"
         foreach ($item in $compo_all_type ) {
           echo "start"
           echo "item=$item"
