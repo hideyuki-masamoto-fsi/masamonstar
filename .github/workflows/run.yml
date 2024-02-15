@@ -99,7 +99,8 @@ jobs:
         #echo "compo_key=${{ needs.excelgraph.outputs.compo_testtype.Type }}"
         #echo "compo_value=${{ needs.excelgraph.outputs.compo_testtype }}.keys"
         #echo "compo_key=${{ needs.excelgraph.outputs.compo_testtype.Count }}"        
-        echo "compo=${{ matrix.compolist }}"
+        #echo "compo=${{ matrix.compolist }}"
+        echo "compo"
         #$test_compo_type_list=${{ needs.excelgraph.outputs.compo_testtype }}
         #echo "test_compo_type_list=${test_compo_type_list}"
         #echo "type=$(${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq "${{ matrix.compolist }} }).Type}}"
