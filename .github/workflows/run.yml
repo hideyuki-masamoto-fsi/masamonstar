@@ -116,7 +116,7 @@ jobs:
           echo "item=$item"
           echo("Name: " + $item.Name + ", Type: " + $item.Type)
         }
-        $targetcompo = ${{matrix.com}}
+        $targetcompo = ${{matrix.compolist}}
         $JsonFilePath = "./.github/workflows/choices.json"
         $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
 
