@@ -105,7 +105,7 @@ jobs:
     runs-on: windows-latest
     needs: excelgraph
     strategy:
-      max-parallel: 2
+      max-parallel: 5
       matrix:
         compolist: ${{fromJson(needs.excelgraph.outputs.compo_list)}}
     steps:
@@ -122,8 +122,8 @@ jobs:
           $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
           $compolist += "["
 
-          echo "compolist_start0=${{needs.excelgraph.outputs.compo_list}}"
-          #echo "compolist_start=${{fromJson(needs.excelgraph.outputs.compo_list)}}"
+          echo "compolist_start0='${{needs.excelgraph.outputs.compo_list}}'"
+          echo "compolist_start5="${{needs.excelgraph.outputs.compo_list}}""
 
 
           echo "compolist_start=${{fromJson(needs.excelgraph.outputs.compo_list)}}"
