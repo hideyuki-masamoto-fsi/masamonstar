@@ -123,7 +123,7 @@ jobs:
           $compolist += "["
 
           echo "compolist_start=${{fromJson(needs.excelgraph.outputs.compo_list)}}"
-          echo "compolist_start1=(${{fromJson(sneeds.excelgraph.outputs.compo_list)}} | ConvertFrom-Json)"
+          echo "compolist_start1=(${{fromJson(needs.excelgraph.outputs.compo_list)}} | ConvertFrom-Json)"
           echo "compolist_start2=${fromJson(needs.excelgraph.outputs.compo_list)}"
           echo "compolist_start3=${{fromJson($needs.excelgraph.outputs.compo_list)}}"
           #$compoList = $fromJson(needs.excelgraph.outputs.compo_list)
