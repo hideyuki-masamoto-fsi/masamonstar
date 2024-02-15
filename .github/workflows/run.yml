@@ -94,11 +94,11 @@ jobs:
     - name: Create UnitTest Branch
       if :  ($needs.excelgraph.outputs.compo_testtype.Values | Where-Object { $_.Name -eq '${{ matrix.compolist }}' }).Type == 'csv'
       run: |
-        echo "compo_if=${{ needs.excelgraph.outputs.compo_testtype }}"
-        echo "compo_value=${{ needs.excelgraph.outputs.compo_testtype.keys }}"
-        echo "compo_key=${{ needs.excelgraph.outputs.compo_testtype.Type }}"
-        echo "compo_value=${{ needs.excelgraph.outputs.compo_testtype }}.keys"
-        echo "compo_key=${{ needs.excelgraph.outputs.compo_testtype.Count }}"        
+        #echo "compo_if=${{ needs.excelgraph.outputs.compo_testtype }}"
+        #echo "compo_value=${{ needs.excelgraph.outputs.compo_testtype.keys }}"
+        #echo "compo_key=${{ needs.excelgraph.outputs.compo_testtype.Type }}"
+        #echo "compo_value=${{ needs.excelgraph.outputs.compo_testtype }}.keys"
+        #echo "compo_key=${{ needs.excelgraph.outputs.compo_testtype.Count }}"        
         echo "compo=${{ matrix.compolist }}"
         #$test_compo_type_list=${{ needs.excelgraph.outputs.compo_testtype }}
         #echo "test_compo_type_list=${test_compo_type_list}"
@@ -110,15 +110,15 @@ jobs:
         #$compo_all_type = ${ needs.excelgraph.outputs.compo_testtype }
         #$compo_all_type_env = env.compo_testtype
         #$compo_all_type_env = ${env.compo_testtype}
-        $compo_all_type = '${ needs.excelgraph.outputs.compo_testtype }'
+        #$compo_all_type = '${ needs.excelgraph.outputs.compo_testtype }'
         #$compo_all_type = ${{ fromJson(needs.excelgraph.outputs.compo_testtype) }}
-        echo "compo_all_type=$compo_all_type"
+        #echo "compo_all_type=$compo_all_type"
         #echo "compo_all_type_env=$compo_all_type_env"
-        foreach ($item in $compo_all_type ) {
-          echo "start"
-          echo "item=$item"
-          echo("Name: " + $item.Name + ", Type: " + $item.Type)
-        }
+        #foreach ($item in $compo_all_type ) {
+          #echo "start"
+          #echo "item=$item"
+          #echo("Name: " + $item.Name + ", Type: " + $item.Type)
+        #}
 
   Exec_ECU-Build:
     runs-on: windows-latest
