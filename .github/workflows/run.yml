@@ -116,7 +116,7 @@ jobs:
           echo "item=$item"
           echo("Name: " + $item.Name + ", Type: " + $item.Type)
         }
-        $targetcompo = ${{ matrix.compolist }}
+        $targetcompo = "${{ matrix.compolist }}"
         $JsonFilePath = "choices.json"
         $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
         $testtype = $targetcompo | ConvertFrom-Json | ForEach-Object { \(JsonData.\)_.test_type }
