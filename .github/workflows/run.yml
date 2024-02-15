@@ -68,11 +68,32 @@ jobs:
     - name: Create UnitTest Branch
       if :  (${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq 'Bsm' }).Type == 'csv'
       run: |
-        echo "compo=Tlmf"
-        echo "compo_if=$_.Name"
-        echo "compo_if=${{ steps.create_unittest_brach.outputs.compo_testtype }}"
-        $test_type = ($steps.create_unittest_brach.outputs.compo_testtype.Values | Where-Object { $_.Name -eq 'Bsm' }).Type
-        echo "testtype=${test_type}"
+          $JsonFilePath = ".github/workflows/choices.json"
+          $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
+          $compolist += "["
+
+          foreach ($compo in (${{steps.excelgraph.outputs.compo_list}} | ConvertFrom-Json)) {
+            foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
+              if ($comp_info.node_name -eq "$comp") {
+                $testtype = $comp_info.test_type
+              }
+            }
+            # 取得したテスト種別がcsv(csvのみ実施)・gtest(gtestのみ実施)・mix(csvとgtestを実施)に該当しない場合、エラーとする
+            if ($testtype -eq 'csv' -or $testtype -eq 'gtest' -or $testtype -eq 'mix') {
+              # コンポを格納
+              $compolist += "`""
+              $compolist += $node_name
+              $compolist += "`""
+              $compolist += ","
+            } else {
+              $error_comment="【ERROR】There is an error in the test type : $testtype : compo : $compo ."
+              echo "::error::$error_comment"
+            }
+          }
+          $compolist += "]"
+          $compolist = $compolist -replace '\,]',']'
+
+          echo "complist=$compolist"
 
   Exec_GTestConvTool:
     runs-on: windows-latest
