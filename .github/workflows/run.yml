@@ -124,9 +124,9 @@ jobs:
 
           echo "compolist_start0='${{needs.excelgraph.outputs.compo_list}}'"
           echo "compolist_start0=@${{needs.excelgraph.outputs.compo_list}}"
-          #$compolist_start0=${{needs.excelgraph.outputs.compo_list}}
+          $compolist_start0=${{needs.excelgraph.outputs.compo_list}} -replace '[(.*)]', "'$1'"
           #$compolist_start0 = ${{needs.excelgraph.outputs.compo_list}}.Replace('[','(').Replace(']',')').Replace('"',''').Replace(',',''',''')
-          #echo "compolist_start5=$compolist_start0"
+          echo "compolist_start5=$compolist_start0"
 
 
           echo "compolist_start=${{fromJson(needs.excelgraph.outputs.compo_list)}}"
