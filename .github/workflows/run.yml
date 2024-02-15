@@ -75,7 +75,7 @@ jobs:
            echo "compo=$compo"
            if ($comp_info.node_name -eq "$compo") {
              echo "comp_info=$comp_info"
-             $testtype = '$comp_info.test_type'
+             $testtype = $comp_info.test_type
            }
          }
          echo "testtype=$testtype"
