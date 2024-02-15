@@ -69,9 +69,11 @@ jobs:
        foreach ($compo in $compo_list | ConvertFrom-Json ) {
          foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
            if ($comp_info.node_name -eq "$comp") {
-             $testtype = $comp_info.test_type
+             echo "comp_info=$comp_info"
+             $testtype = '$comp_info.test_type'
            }
          }
+         echo "testtype=$testtype"
          # 取得したテスト種別がcsv(csvのみ実施)・gtest(gtestのみ実施)・mix(csvとgtestを実施)に該当しない場合、エラーとする
          if ($testtype -eq 'csv' -or $testtype -eq 'gtest' -or $testtype -eq 'mix') {
            # コンポを格納
