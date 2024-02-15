@@ -72,8 +72,8 @@ jobs:
          foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
            
            echo "node_name=$comp_info.node_name"
-           echo "comp=$comp"
-           if ($comp_info.node_name -eq "$comp") {
+           echo "compo=$compo"
+           if ($comp_info.node_name -eq "$compo") {
              echo "comp_info=$comp_info"
              $testtype = '$comp_info.test_type'
            }
