@@ -107,6 +107,7 @@ jobs:
         $test_type = ($needs.excelgraph.outputs.compo_testtype.Values | Where-Object { $_.Name -eq 'Bsm' }).Type
         echo "test_type=${test_type}"
         $compo_all_type = ${ needs.excelgraph.outputs.compo_testtype }
+        echo "compo_all_type=$compo_all_type"
         foreach ($item in $compo_all_type ) {
           echo "start"
           echo "item=$item"
