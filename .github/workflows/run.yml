@@ -24,7 +24,7 @@ jobs:
       id: create_unittest_brach
       run: |
        $info_compo = 'Bsm'
-       if($info_compo -eq '${{env.input_compo}}'){
+       if($info_compo -eq ${{env.input_compo}}){
         echo "Happy"
         echo "${{env.input_compo}}"
         echo "'${{env.input_compo}}'"
