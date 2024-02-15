@@ -123,7 +123,9 @@ jobs:
           $compolist += "["
 
           echo "compolist_start0='${{needs.excelgraph.outputs.compo_list}}'"
-          echo "compolist_start5="${{needs.excelgraph.outputs.compo_list}}""
+          $compolist_start0=${{needs.excelgraph.outputs.compo_list}}
+          $compolist_start0 = $compolist_start0 -replace '[(.*)]', "'$1'"
+          echo "compolist_start5=$compolist_start0"
 
 
           echo "compolist_start=${{fromJson(needs.excelgraph.outputs.compo_list)}}"
