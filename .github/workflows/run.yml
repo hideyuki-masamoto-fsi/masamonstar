@@ -106,7 +106,9 @@ jobs:
         #$test_type=(${{ needs.excelgraph.outputs.compo_testtype }}.GetEnumerator() | Where-Object { $_.Name -eq "${{ matrix.compolist }}" }).Type
         $test_type = ($needs.excelgraph.outputs.compo_testtype.Values | Where-Object { $_.Name -eq 'Bsm' }).Type
         echo "test_type=${test_type}"
-        foreach ($item in $needs.excelgraph.outputs.compo_testtype) {
+        $compo_all_type = ${ needs.excelgraph.outputs.compo_testtype }
+        foreach ($item in $compo_all_type ) {
+          echo "start"
           echo "item=$item"
           echo("Name: " + $item.Name + ", Type: " + $item.Type)
         }
