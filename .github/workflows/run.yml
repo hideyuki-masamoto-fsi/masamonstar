@@ -96,6 +96,8 @@ jobs:
         echo "compo"
         $compo_all_type_env = ${env.compo_testtype}
         echo "compo_all_type_env=$compo_all_type_env"
+        $compo_all_type_env = ${{env.compo_testtype}}
+        echo "compo_all_type_env=$compo_all_type_env"
 
 
   Exec_ECU-Build:
