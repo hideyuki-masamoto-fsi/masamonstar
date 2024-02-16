@@ -59,6 +59,7 @@ jobs:
           $compo_list += $comp_info.Name
           $compo_list += "`""
           $compo_list += ","
+          echo "testtype=$comp_info.test_type"
        }
        $compo_list += "]"
        $compo_list = $compo_list -replace '\,]',']'
@@ -81,5 +82,6 @@ jobs:
         cd ./src/
         $input_compo='${{ matrix.compolist }}'
         $testype="csv"
+        echo "testtype=$testtype"
         python ./test.py ${{ matrix.compolist }} $testype
         
