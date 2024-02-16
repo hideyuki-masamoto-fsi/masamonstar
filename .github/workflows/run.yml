@@ -80,5 +80,5 @@ jobs:
         dir
         cd ./src/
         $testype='csv'
-        python ./test.py {{ matrix.compolist }} $testtype
+        python ./test.py ${{ matrix.compolist }} $testtype
         
