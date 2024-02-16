@@ -3,7 +3,7 @@
 import os,sys,json,re,shutil
 
 def main(compo,testtype):
-    print('compo & testtype', compo, testtype)
+    print('compo:%s testtype:%s' % (compo, testtype))
 
 if __name__ == '__main__':
 
