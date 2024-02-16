@@ -73,6 +73,7 @@ jobs:
            $compolist += $node_name
            $compolist += "`""
            $compolist += ","
+           echo "complist+=('$node_name')"  | Out-File -Append -FilePath $env:GITHUB_ENV
          } else {
            $error_comment="【ERROR】There is an error in the test type : $testtype : compo : $compo ."
            echo "::error::$error_comment"
@@ -82,7 +83,7 @@ jobs:
        $compolist = $compolist -replace '\,]',']'
 
        echo "complist=$compolist"
-       echo "complist=$complist" | Out-File -Append -FilePath $env:GITHUB_ENV
+       #echo "complist=$complist" | Out-File -Append -FilePath $env:GITHUB_ENV
 
 
   Exec_GTestConvTool:
