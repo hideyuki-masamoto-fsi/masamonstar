@@ -60,8 +60,8 @@ jobs:
        echo "compo_list=$compo_list" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
        
        $JsonFilePath = ".github/workflows/choices.json"
-       $JsonData = Get-Content $JsonData -Raw | ConvertFrom-Json
-       foreach ($compo in $compo_list | ConvertFrom-Json ) {
+       $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
+       foreach ($compo in $JsonData | ConvertFrom-Json ) {
          foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
            $testtype = $comp_info.test_type
          }
