@@ -79,7 +79,6 @@ jobs:
       run: |
         pwd
         dir
-        cd ./src/
         $input_compo='${{ matrix.compolist }}'
         $testtype="csv"
         echo "testtype=$testtype"
@@ -89,6 +88,7 @@ jobs:
           if ($comp_info.node_name -eq "${{ matrix.compolist }}") {
             $testtype = $comp_info.test_type
             echo "testtype_compo=$testtype"
+            cd ./src/
             python ./test.py ${{ matrix.compolist }} $testtype
           }
         }
