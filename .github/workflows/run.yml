@@ -80,6 +80,6 @@ jobs:
         dir
         cd ./src/
         $input_compo='${{ matrix.compolist }}'
-        $testype='csv'
-        python ./test.py ${{ matrix.compolist }} csv
+        $testype="csv"
+        python ./test.py ${{ matrix.compolist }} $testype
         
