@@ -79,7 +79,7 @@ jobs:
         pwd
         dir
         cd ./src/
-        $input_compo=${{ matrix.compolist }}
+        $input_compo='${{ matrix.compolist }}'
         $testype='csv'
         python ./test.py $input_compo $testtype
         
