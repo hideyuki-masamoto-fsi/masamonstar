@@ -6,7 +6,8 @@ on:
    input_node:
     description: 'Input Node Name.'
     required: true
- 
+env:
+ complist: '[]'
     
 jobs:
   excelgraph:
@@ -23,15 +24,6 @@ jobs:
     - name: Create UnitTest Branch
       id: create_unittest_brach
       run: |
-       $info_compo='Bsm'
-       echo "input_node='${{inputs.input_node}}'"
-       if($info_compo -eq ${{inputs.input_node}}){
-        echo "Happy"
-        echo "$info_compo"
-        echo "${{inputs.input_node}}"
-        echo "'${{inputs.input_node}}'"
-       }
-
        $targetcompo='["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
        #echo "${targetcompo}"
        echo "0"
@@ -52,13 +44,6 @@ jobs:
        echo "compo_testtype=$compo_testtype" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
        echo "compo_testtype=$compo_testtype" >> $GITHUB_ENV
        echo "compo_testtype=$compo_testtype"
-       $test_type = ($compo_testtype | Where-Object { $_.Name -eq 'Bsm' }).Type
-       echo "testtype=${test_type}"
-       #$test_type1 = $compo_testtype['Bsm']
-       #echo "testtype1=${test_type1}"
-
-       #echo "input_compo=${env.input_compo}"
-       #echo "input_compo=${{fromJson( env.input_compo )}}"
 
        $compo_list += "["
        echo "compo_list=$compo_list"
@@ -71,22 +56,14 @@ jobs:
        }
        $compo_list += "]"
        $compo_list = $compo_list -replace '\,]',']'
-       echo "compo_list_2=$compo_list"
+
        echo "compo_list=$compo_list" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
        
        $JsonFilePath = ".github/workflows/choices.json"
        $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
-       #foreach ($compo in $steps.create_unittest_brach.outputs.compo_list) {
        foreach ($compo in $compo_list | ConvertFrom-Json ) {
          foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
-           
-           echo "node_name=$comp_info.node_name"
-           echo "compo=$compo"
-           if ($comp_info.node_name -eq '${{inputs.input_node}}') {
-             echo "HAppy=${{inputs.input_compo}}"
-             echo "comp_info=$comp_info"
-             $testtype = $comp_info.test_type
-           }
+           $testtype = $comp_info.test_type
          }
          echo "testtype=$testtype"
          # 取得したテスト種別がcsv(csvのみ実施)・gtest(gtestのみ実施)・mix(csvとgtestを実施)に該当しない場合、エラーとする
@@ -105,41 +82,7 @@ jobs:
        $compolist = $compolist -replace '\,]',']'
 
        echo "complist=$compolist"
-    - name: Create UnitTest Branch
-      if :  (${{ steps.create_unittest_brach.outputs.compo_testtype }} | Where-Object { $_.Name -eq 'Bsm' }).Type == 'csv'
-      run: |
-          $JsonFilePath = ".github/workflows/choices.json"
-          $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
-          $compolist += "["
 
-          echo "compolist_start=${{fromJson(steps.create_unittest_brach.outputs.compo_list)}}"
-          echo "compolist_start1=(${{fromJson(steps.create_unittest_brach.outputs.compo_list)}} | ConvertFrom-Json)"
-          echo "compolist_start2=${fromJson(steps.create_unittest_brach.outputs.compo_list)}"
-          #$compoList = $fromJson(steps.create_unittest_brach.outputs.compo_list)
-
-          #foreach ($compo in $steps.create_unittest_brach.outputs.compo_list) {
-          foreach ($compo in ${fromJson(steps.create_unittest_brach.outputs.compo_list)} ) {
-            foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
-              if ($comp_info.node_name -eq "$comp") {
-                $testtype = $comp_info.test_type
-              }
-            }
-            # 取得したテスト種別がcsv(csvのみ実施)・gtest(gtestのみ実施)・mix(csvとgtestを実施)に該当しない場合、エラーとする
-            if ($testtype -eq 'csv' -or $testtype -eq 'gtest' -or $testtype -eq 'mix') {
-              # コンポを格納
-              $compolist += "`""
-              $compolist += $node_name
-              $compolist += "`""
-              $compolist += ","
-            } else {
-              $error_comment="【ERROR】There is an error in the test type : $testtype : compo : $compo ."
-              echo "::error::$error_comment"
-            }
-          }
-          $compolist += "]"
-          $compolist = $compolist -replace '\,]',']'
-
-          echo "complist=$compolist"
 
   Exec_GTestConvTool:
     runs-on: windows-latest
@@ -158,91 +101,7 @@ jobs:
         dir
         cd ./workflows
         dir
-          $JsonFilePath = "choices.json"
-          $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
-          $compolist += "["
 
-          echo "compolist_start0='${{needs.excelgraph.outputs.compo_list}}'"
-          echo "compolist_start0=@${{needs.excelgraph.outputs.compo_list}}"
-          $compolist_start0=${{needs.excelgraph.outputs.compo_list}} -replace '[(.*)]', "'$1'"
-          #$compolist_start0 = ${{needs.excelgraph.outputs.compo_list}}.Replace('[','(').Replace(']',')').Replace('"',''').Replace(',',''',''')
-          echo "compolist_start5=$compolist_start0"
-
-
-          echo "compolist_start=${{fromJson(needs.excelgraph.outputs.compo_list)}}"
-          echo "compolist_start1=(${{fromJson(needs.excelgraph.outputs.compo_list)}} | ConvertFrom-Json)"
-          echo "compolist_start2=${fromJson(needs.excelgraph.outputs.compo_list)}"
-          echo "compolist_start3=$${{fromJson(needs.excelgraph.outputs.compo_list)}}"
-          #$compoList = $fromJson(needs.excelgraph.outputs.compo_list)
-
-          #foreach ($compo in $steps.create_unittest_brach.outputs.compo_list) {
-          foreach ($compo in $${{fromJson(needs.excelgraph.outputs.compo_list)}} ) {
-            foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
-              if ($comp_info.node_name -eq "$comp") {
-                $testtype = $comp_info.test_type
-              }
-            }
-            # 取得したテスト種別がcsv(csvのみ実施)・gtest(gtestのみ実施)・mix(csvとgtestを実施)に該当しない場合、エラーとする
-            if ($testtype -eq 'csv' -or $testtype -eq 'gtest' -or $testtype -eq 'mix') {
-              # コンポを格納
-              $compolist += "`""
-              $compolist += $node_name
-              $compolist += "`""
-              $compolist += ","
-            } else {
-              $error_comment="【ERROR】There is an error in the test type : $testtype : compo : $compo ."
-              echo "::error::$error_comment"
-            }
-          }
-          $compolist += "]"
-          $compolist = $compolist -replace '\,]',']'
-
-          echo "complist=$compolist"
-    - name: Create UnitTest Branch
-      run: |
-        echo "compo"
-        $compo_all_type_env = ${env.compo_testtype}
-        echo "compo_all_type_env=$compo_all_type_env"
-        foreach ($item in $compo_all_type_env ) {
-          echo "start"
-          echo "item=$item"
-          echo("Name: " + $item.Name + ", Type: " + $item.Type)
-        }
-        $compo_all_type_env1 = ${{env.compo_testtype}}
-        echo "compo_all_type_env1=$compo_all_type_env1"
-        foreach ($item in $compo_all_type_env1 ) {
-          echo "start1"
-          echo "$compo_all_type_env1"
-          echo "item=$item"
-          echo("Name: " + $item.Name + ", Type: " + $item.Type)
-        }
-        $compo_all_type_env2 = $env.compo_testtype
-        echo "compo_all_type_env1=$compo_all_type_env1"
-        foreach ($item in $compo_all_type_env2 ) {
-          echo "start2"
-          echo "item=$item"
-          echo("Name: " + $item.Name + ", Type: " + $item.Type)
-        }
-        $targetcompo = "${{matrix.compolist}}"
-        $JsonFilePath = "./.github/workflows/choices.json"
-        $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
-
-        foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
-          echo "node_name=$comp_info.node_name"
-          echo "targetcompo=$targetcompo"
-          if ($comp_info.node_name -eq "$targetcompo") {
-            echo "test_type_add = $comp_info.test_type"
-            $testtype = $comp_info.test_type
-          }
-        }
-        echo "testtype=$testtype"
-        #$targetcompo = "${{ matrix.compolist }}"
-        #$JsonFilePath = ".github/workflows/choices.json"
-        #$JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
-        $testtype1 = $JsonData.$targetcompo.test_type
-        \(testtype2 = (ConvertFrom-Json (Get-Content "./.github/workflows/choices.json" -Raw)).Value | Where-Object {\)_.node_name -eq "$"} | Select-Object -ExpandProperty test_type
-        echo "testtype1=$testtype1"
-        echo "testtype2=$testtype2"
   Exec_ECU-Build:
     runs-on: windows-latest
     needs: [excelgraph,Exec_GTestConvTool]
