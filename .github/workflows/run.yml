@@ -82,6 +82,7 @@ jobs:
        $compolist = $compolist -replace '\,]',']'
 
        echo "complist=$compolist"
+       echo "complist=$complist" | Out-File -Append -FilePath $env:GITHUB_ENV
 
 
   Exec_GTestConvTool:
@@ -101,6 +102,7 @@ jobs:
         dir
         cd ./workflows
         dir
+        echo "compolist=${{env.complist}}"
 
   Exec_ECU-Build:
     runs-on: windows-latest
