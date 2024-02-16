@@ -61,7 +61,7 @@ jobs:
        
        $JsonFilePath = ".github/workflows/choices.json"
        $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
-       foreach ($compo in $JsonData | ConvertFrom-Json ) {
+       foreach ($compo in $compo_list | ConvertFrom-Json ) {
          foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
            $testtype = $comp_info.test_type
          }
