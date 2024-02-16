@@ -83,5 +83,14 @@ jobs:
         $input_compo='${{ matrix.compolist }}'
         $testtype="csv"
         echo "testtype=$testtype"
-        python ./test.py ${{ matrix.compolist }} $testtype
+        $JsonFilePath = ".github/workflows/choices.json"
+        $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
+        foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
+          if ($comp_info.node_name -eq "${{ matrix.compolist }}") {
+            $testtype = $comp_info.test_type
+            echo "testtype_compo=$testtype"
+            python ./test.py ${{ matrix.compolist }} $testtype
+          }
+        }
+        
         
