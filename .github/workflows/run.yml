@@ -35,7 +35,6 @@ jobs:
               Write-Host "$build_info get information"
             }
           }
-          echo "build_info=$build_info"
           echo "build_info=$build_info" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
 
           $input_compo='["Mrf","Bsm","DestJdg","VehPred"]'
@@ -85,5 +84,28 @@ jobs:
           echo "--- $path4 ---"
           #出力確認
           echo "$build_info=${{ needs.Exec_ECU-Build.outputs.build_info }}"
-          
+
+  #値確認
+  VALUE-CONFIRM2:
+    runs-on: windows-latest
+    needs: [VALUE-CONFIRM]
+    name: VALUE-CONFIRM2
+    steps:
+      - name: value_confirm
+        run: | 
+          pwd
+          #変数作成
+          $arg1 = "argmenttest"
+          $arg2 = "argmenttest2"
+          $path = "${arg1}file"
+          echo "--- $path ---"
+          $path2 =Join-Path $arg1 $arg2
+          echo "--- $path2 ---"
+          $path3 =Join-Path $path2 "${arg1}テスト結果.csv"
+          echo "--- $path3 ---"
+          $path4= Join-Path C:/w "$arg2"
+          echo "--- $path4 ---"
+          #出力確認
+          echo "$build_info=${{ needs.Exec_ECU-Build.outputs.build_info }}"
+                    
     
