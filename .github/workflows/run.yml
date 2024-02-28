@@ -24,38 +24,8 @@ jobs:
     - name: Create UnitTest Branch
       id: create_unittest_brach
       run: |
-       $targetcompo='["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
-       #echo "${targetcompo}"
-       echo "0"
-       $compo_testtype = @()
-       echo "1"
-       foreach ($compo in ($targetcompo | ConvertFrom-Json)) {
-         echo "compo=$compo"
-         if ($compo -ne "Bsm"){
-           $test_type = "csv"
-         }else{
-           $test_type = "mix"
-         }
-         $compo_testtype += @( @{Name = "$compo"; Type = "$test_type"})
-       }
-       foreach ($item in $compo_testtype) {
-         echo("Name: " + $item.Name + ", Type: " + $item.Type)
-       }
-       echo "compo_testtype=$compo_testtype" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
-       echo "compo_testtype=$compo_testtype" >> $GITHUB_ENV
-       echo "compo_testtype=$compo_testtype"
-
-       $compo_list += "["
-       echo "compo_list=$compo_list"
-
-       foreach ($comp_info in $compo_testtype) {
-          $compo_list += "`""
-          $compo_list += $comp_info.Name
-          $compo_list += "`""
-          $compo_list += ","
-       }
-       $compo_list += "]"
-       $compo_list = $compo_list -replace '\,]',']'
+       $targetcompo='["Bsm"]'
+       $compo_list = $targetcompo
 
        echo "compo_list=$compo_list" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
        
