@@ -28,10 +28,13 @@ jobs:
        $compo_list = $targetcompo
 
        echo "compo_list=$compo_list" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
-       
+
+    - name: run test
+      run: |
        $JsonFilePath = ".github/workflows/choices.json"
        $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
-       foreach ($compo in $compo_list | ConvertFrom-Json ) {
+       foreach ($compo in ${{ steps.create_unittest_brach.outputs.targetcompolist }} | ConvertFrom-Json ) {
+         echo "compo=$compo"
          foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
            $testtype = $comp_info.test_type
          }
