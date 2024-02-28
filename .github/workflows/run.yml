@@ -31,6 +31,8 @@ jobs:
 
     - name: run test
       run: |
+       $compo_list=${{steps.create_unittest_brach.outputs.compo_list}}
+       echo "compolist=$compo_list"
        $JsonFilePath = ".github/workflows/choices.json"
        $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
        foreach ($compo in $steps.create_unittest_brach.outputs.compo_list) {
