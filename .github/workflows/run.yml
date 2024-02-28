@@ -35,7 +35,7 @@ jobs:
        echo "compolist=$compo_list"
        $JsonFilePath = ".github/workflows/choices.json"
        $JsonData = Get-Content $JsonFilePath -Raw | ConvertFrom-Json
-       foreach ($compo in $compo_list) {
+       foreach ($compo in JSON.parse(${{steps.create_unittest_brach.outputs.compo_list}})) {
          echo "compo=$compo"
          foreach ($comp_info in $JsonData.PSObject.Properties.Value) {
            $testtype = $comp_info.test_type
