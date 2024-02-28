@@ -24,7 +24,7 @@ jobs:
     - name: Create UnitTest Branch
       id: create_unittest_brach
       run: |
-       $targetcompo='["Bsm"]'
+       $targetcompo='["Tlmf","Lcd","Bsm","DestJdg","OmiArb"]'
        $compo_list = $targetcompo
 
        echo "compo_list=$compo_list" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
