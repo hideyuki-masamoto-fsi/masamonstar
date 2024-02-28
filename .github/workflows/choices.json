@@ -4,7 +4,7 @@
         "node_name": "Mrf",
         "stub_path": "TBD",
         "test_type": "csv",
-        "core_partition": "base_cr"
+        "core_partition": "base_ca"
     },
     "BlindSpotMonitorApplications": {
         "node_name": "Bsm",
