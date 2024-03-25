@@ -32,7 +32,7 @@ jobs:
           foreach ($cmp_info in $JsonData.PSObject.Properties.Value) {
             if ($cmp_info.node_name -eq "Mrf") {
               $build_info = $cmp_info.core_partition
-              Write-Host "$build_info get information"
+              echo "$build_info get information"
             }
           }
           echo "build_info=$build_info" | Out-File -Append -FilePath $env:GITHUB_OUTPUT
