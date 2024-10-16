@@ -112,7 +112,6 @@ jobs:
           sleep 120
 
       - name: timeout
-        if: failure()
           echo "::error::Please contact the environmental team."
         
           
