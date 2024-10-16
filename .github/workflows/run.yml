@@ -108,4 +108,9 @@ jobs:
           echo "--- $path4 ---"
           #出力確認
           echo "$build_info=${{ needs.Exec_ECU-Build.outputs.build_info }}"
-        
+          sleep 120
+
+      - name: timeout
+        if: failure()
+        run: | 
+          echo "::error::Please contact the environmental team."
