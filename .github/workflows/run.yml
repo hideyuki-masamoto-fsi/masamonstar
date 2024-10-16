@@ -92,6 +92,7 @@ jobs:
     name: VALUE-CONFIRM2
     steps:
       - name: value_confirm
+        timeout-minutes: 1
         run: | 
           pwd
           #変数作成
@@ -107,5 +108,13 @@ jobs:
           echo "--- $path4 ---"
           #出力確認
           echo "$build_info=${{ needs.Exec_ECU-Build.outputs.build_info }}"
+
+          sleep 120
+
+      - name: timeout
+        if: failure()
+          echo "::error::Please contact the environmental team."
+        
+          
                     
     
